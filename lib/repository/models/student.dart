@@ -1,4 +1,4 @@
-import 'package:tutorhub/classes/student_post.dart';
+import 'package:tutorhub/repository/models/student_post.dart';
 
 import 'chat.dart';
 import 'user.dart';

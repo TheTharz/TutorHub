@@ -1,5 +1,5 @@
-import 'package:tutorhub/classes/social_link.dart';
-import 'package:tutorhub/classes/tutor_post.dart';
+import 'package:tutorhub/repository/models/social_link.dart';
+import 'package:tutorhub/repository/models/tutor_post.dart';
 
 import 'chat.dart';
 import 'qualification.dart';
