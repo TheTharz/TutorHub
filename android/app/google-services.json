@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "699607110047",
+    "project_id": "tutorhub-e5cd0",
+    "storage_bucket": "tutorhub-e5cd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699607110047:android:9ee5c967ff4ee70b05adaa",
+        "android_client_info": {
+          "package_name": "com.example.tutorhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuEX69nrkWjZxpaTi1AjZBV-AqAgeCuKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
