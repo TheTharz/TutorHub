@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tutorhub/firebase_options.dart';
+import 'package:tutorhub/ui/screens/forget_password_page.dart';
 import 'package:tutorhub/ui/screens/sign_in_page.dart';
 import 'package:tutorhub/ui/screens/sign_up_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
           textTheme: TextTheme(
-            displayLarge: const TextStyle(
-              fontSize: 48,
+            displayLarge: GoogleFonts.poppins(
+              fontSize: 40,
               fontWeight: FontWeight.bold,
             ),
             titleLarge: GoogleFonts.poppins(
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         ),
         // home: StartPage(),
         // home: SignInPage(),
-        home: SignUpPage());
+        // home: SignUpPage(),
+        home: ForgetPasswordPage());
   }
 }
