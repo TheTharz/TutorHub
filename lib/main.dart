@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tutorhub/firebase_options.dart';
 import 'package:tutorhub/ui/screens/sign_in_page.dart';
+import 'package:tutorhub/ui/screens/sign_up_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
 
 void main() async {
@@ -18,33 +19,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TutorHub',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        textTheme: TextTheme(
-          displayLarge: const TextStyle(
-            fontSize: 48,
-            fontWeight: FontWeight.bold,
-          ),
-          titleLarge: GoogleFonts.poppins(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-          bodyMedium: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-            color: Colors.grey,
-          ),
-          displaySmall: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.normal,
+        title: 'TutorHub',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          textTheme: TextTheme(
+            displayLarge: const TextStyle(
+              fontSize: 48,
+              fontWeight: FontWeight.bold,
+            ),
+            titleLarge: GoogleFonts.poppins(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+            bodyMedium: GoogleFonts.poppins(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey,
+            ),
+            displaySmall: GoogleFonts.poppins(
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ),
-      ),
-      // home: StartPage(),
-      home: SignInPage(),
-    );
+        // home: StartPage(),
+        // home: SignInPage(),
+        home: SignUpPage());
   }
 }

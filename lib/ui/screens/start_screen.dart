@@ -30,7 +30,7 @@ class StartPage extends StatelessWidget {
           CustomSolidButton(onPressed: () {}, text: 'Sign In'),
           const SizedBox(height: 8), // Add space between buttons
           SizedBox(
-            width: 200,
+            width: MediaQuery.of(context).size.width * 0.7,
             child: OutlinedButton(
               onPressed: () {
                 // Handle sign up logic
