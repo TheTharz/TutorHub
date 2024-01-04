@@ -1,8 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tutorhub/firebase_options.dart';
+import 'package:tutorhub/ui/screens/sign_in_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: TextTheme(
           displayLarge: const TextStyle(
-            fontSize: 72,
+            fontSize: 48,
             fontWeight: FontWeight.bold,
           ),
           titleLarge: GoogleFonts.poppins(
@@ -32,10 +37,14 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.normal,
             color: Colors.grey,
           ),
-          displaySmall: GoogleFonts.poppins(),
+          displaySmall: GoogleFonts.poppins(
+            fontSize: 12,
+            fontWeight: FontWeight.normal,
+          ),
         ),
       ),
-      home: StartPage(),
+      // home: StartPage(),
+      home: SignInPage(),
     );
   }
 }
