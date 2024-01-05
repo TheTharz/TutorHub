@@ -18,9 +18,12 @@ class CustomSolidButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue, // Background color
         ),
-        child: Text(
-          text,
-          style: const TextStyle(color: Colors.white), // Text color
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.white), // Text color
+          ),
         ),
       ),
     );

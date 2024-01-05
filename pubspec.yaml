@@ -65,6 +65,7 @@ flutter:
     - assets/images/start.png
     - assets/images/forgetpassword.png
     - assets/images/resetpassword.png
+    - assets/images/star.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
