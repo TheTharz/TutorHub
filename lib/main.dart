@@ -23,42 +23,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TutorHub',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        textTheme: TextTheme(
-          displayLarge: GoogleFonts.poppins(
-            fontSize: 40,
-            fontWeight: FontWeight.bold,
-          ),
-          displayMedium: GoogleFonts.poppins(
-            fontSize: 36,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue,
-          ),
-          titleLarge: GoogleFonts.poppins(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-          bodyMedium: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-            color: Colors.grey,
-          ),
-          displaySmall: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.normal,
+        title: 'TutorHub',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          textTheme: TextTheme(
+            displayLarge: GoogleFonts.poppins(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+            displayMedium: GoogleFonts.poppins(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
+            ),
+            titleLarge: GoogleFonts.poppins(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+            bodyMedium: GoogleFonts.poppins(
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey,
+            ),
+            displaySmall: GoogleFonts.poppins(
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+            ),
           ),
         ),
-      ),
-      // home: StartPage(),
-      // home: SignInPage(),
-      // home: SignUpPage(),
-      // //home: ForgetPasswordPage()
-      // home: ResetPasswordPage()
-      // home: ResetPasswordSuccessPage()
-    );
+        // home: StartPage(),
+        // home: SignInPage(),
+        // home: SignUpPage(),
+        // home: ForgetPasswordPage()
+        // home: ResetPasswordPage()
+        // home: ResetPasswordSuccessPage()
+        home: OTPVerificationPage());
   }
 }
