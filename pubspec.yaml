@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.9
   google_fonts: ^6.1.0
   sign_button: ^2.0.6
+  flutter_otp_text_field: ^1.1.0+2
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
     - assets/images/forgetpassword.png
     - assets/images/resetpassword.png
     - assets/images/star.png
+    - assets/images/otpverification.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

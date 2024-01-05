@@ -5,6 +5,7 @@ import 'package:tutorhub/firebase_options.dart';
 import 'package:tutorhub/ui/screens/forget_password_page.dart';
 import 'package:tutorhub/ui/screens/password_reset_success_page.dart';
 import 'package:tutorhub/ui/screens/reset_password_page.dart';
+import 'package:tutorhub/ui/screens/otp_verification_page.dart';
 import 'package:tutorhub/ui/screens/sign_in_page.dart';
 import 'package:tutorhub/ui/screens/sign_up_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
       // home: StartPage(),
       // home: SignInPage(),
       // home: SignUpPage(),
-      // home: ForgetPasswordPage()
+      // //home: ForgetPasswordPage()
       // home: ResetPasswordPage()
       // home: ResetPasswordSuccessPage()
     );
