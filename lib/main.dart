@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tutorhub/firebase_options.dart';
 import 'package:tutorhub/ui/screens/forget_password_page.dart';
+import 'package:tutorhub/ui/screens/otp_verification_page.dart';
 import 'package:tutorhub/ui/screens/sign_in_page.dart';
 import 'package:tutorhub/ui/screens/sign_up_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         // home: StartPage(),
         // home: SignInPage(),
         // home: SignUpPage(),
-        home: ForgetPasswordPage());
+        //home: ForgetPasswordPage());
+        home: OTPVerificationPage());
   }
 }
