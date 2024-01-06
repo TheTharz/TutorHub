@@ -9,6 +9,7 @@ import 'package:tutorhub/ui/screens/otp_verification_page.dart';
 import 'package:tutorhub/ui/screens/sign_in_page.dart';
 import 'package:tutorhub/ui/screens/sign_up_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
+import 'package:tutorhub/utils/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,34 +26,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'TutorHub',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          textTheme: TextTheme(
-            displayLarge: GoogleFonts.poppins(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-            ),
-            displayMedium: GoogleFonts.poppins(
-              fontSize: 36,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue,
-            ),
-            titleLarge: GoogleFonts.poppins(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-            bodyMedium: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.normal,
-              color: Colors.grey,
-            ),
-            displaySmall: GoogleFonts.poppins(
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-        ),
+        themeMode: ThemeMode.system,
+        theme: TAppTheme.lightTheme,
+        darkTheme: TAppTheme.darkTheme,
         // home: StartPage(),
         // home: SignInPage(),
         // home: SignUpPage(),
