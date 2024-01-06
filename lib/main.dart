@@ -1,12 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tutorhub/bindings/general_bindings.dart';
+import 'package:tutorhub/features/authentication/screens/login/login.dart';
+import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/firebase_options.dart';
 import 'package:tutorhub/ui/screens/forget_password_page.dart';
+import 'package:tutorhub/ui/screens/password_reset_success_page.dart';
+import 'package:tutorhub/ui/screens/reset_password_page.dart';
 import 'package:tutorhub/ui/screens/otp_verification_page.dart';
 import 'package:tutorhub/ui/screens/sign_in_page.dart';
 import 'package:tutorhub/ui/screens/sign_up_page.dart';
 import 'package:tutorhub/ui/screens/start_screen.dart';
+import 'package:tutorhub/utils/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,36 +27,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'TutorHub',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          textTheme: TextTheme(
-            displayLarge: GoogleFonts.poppins(
-              fontSize: 40,
-              fontWeight: FontWeight.bold,
-            ),
-            titleLarge: GoogleFonts.poppins(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-            bodyMedium: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.normal,
-              color: Colors.grey,
-            ),
-            displaySmall: GoogleFonts.poppins(
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-        ),
+        themeMode: ThemeMode.system,
+        theme: TAppTheme.lightTheme,
+        darkTheme: TAppTheme.darkTheme,
+        initialBinding: GeneralBindings(),
         // home: StartPage(),
         // home: SignInPage(),
         // home: SignUpPage(),
-        //home: ForgetPasswordPage());
-        home: OTPVerificationPage());
+        // home: ForgetPasswordPage()
+        // home: ResetPasswordPage()
+        // home: ResetPasswordSuccessPage()
+        // home: OTPVerificationPage(),
+        // home: LoginScreen(),
+        home: SignUpScreen());
   }
 }
