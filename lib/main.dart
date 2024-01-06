@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tutorhub/bindings/general_bindings.dart';
+import 'package:tutorhub/data/repositories/authentication/authentication_repository.dart';
 import 'package:tutorhub/features/authentication/screens/login/login.dart';
 import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/firebase_options.dart';
@@ -17,7 +18,8 @@ import 'package:tutorhub/utils/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((FirebaseApp value) => Get.put(AuthenticationRepository()));
   runApp(const MyApp());
 }
 

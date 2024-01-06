@@ -8,4 +8,6 @@ class Chat {
   List<Message> messages;
 
   Chat(this.id, this.user1, this.user2, this.messages);
+
+  toJson() {}
 }

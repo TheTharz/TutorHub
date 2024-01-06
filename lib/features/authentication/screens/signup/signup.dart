@@ -17,102 +17,86 @@ class _SignUpScreenState extends State<SignUpScreen> {
     bool _obscurePassword = true;
     bool _obscureConfirmPassword = true;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false, // Prevents overflow error
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text('Create Account',
-                    style: Theme.of(context).textTheme.headlineLarge),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false, // Prevents overflow error
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text('Create Account',
+                      style: Theme.of(context).textTheme.headlineLarge),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                Text('Join Our Community With Only Few Steps...',
-                    style: Theme.of(context).textTheme.bodySmall),
+                  Text('Join Our Community With Only Few Steps...',
+                      style: Theme.of(context).textTheme.bodySmall),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                SignUpForm(),
+                  SignUpForm(),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                // Text
-                RichText(
-                    text: TextSpan(
-                        text: "Alread have an account? ",
-                        style: Theme.of(context).textTheme.labelSmall,
-                        children: [
-                      TextSpan(
-                        text: 'Sign In',
-                        style: TextStyle(
-                          color: Colors.blue,
+                  // Text
+                  RichText(
+                      text: TextSpan(
+                          text: "Alread have an account? ",
+                          style: Theme.of(context).textTheme.labelSmall,
+                          children: [
+                        TextSpan(
+                          text: 'Sign In',
+                          style: TextStyle(
+                            color: Colors.blue,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // TODO: Implement the Sign In logic here
+                              // Navigate to the Sign In screen
+                            },
                         ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            // TODO: Implement the Sign In logic here
-                            // Navigate to the Sign In screen
-                          },
-                      ),
-                    ])),
+                      ])),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                // Divider with line
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      const Expanded(
-                        child: Divider(
-                          color: Colors.black54,
+                  // Divider with line
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Divider(
+                            color: Colors.black54,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("Or Continue With",
-                            style: Theme.of(context).textTheme.labelSmall),
-                      ),
-                      const Expanded(
-                        child: Divider(
-                          color: Colors.black54,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text("Or Continue With",
+                              style: Theme.of(context).textTheme.labelSmall),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                SignInButton(
-                    buttonType: ButtonType.google,
-                    btnText: 'Sign Up With Google',
-                    onPressed: () {
-                      print('click');
-                    }),
-                const SizedBox(height: 16),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: Checkbox(
-                          value: true,
-                          onChanged: (value) {},
-                        )),
-                    Text(
-                      'I agree to the Terms And Conditions',
-                      style: Theme.of(context).textTheme.labelSmall,
+                        const Expanded(
+                          child: Divider(
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                )
-              ],
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  SignInButton(
+                      buttonType: ButtonType.google,
+                      btnText: 'Sign Up With Google',
+                      onPressed: () {
+                        print('click');
+                      }),
+                ],
+              ),
             ),
           ),
         ),

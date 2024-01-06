@@ -38,27 +38,39 @@ class SignUpForm extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            TextFormField(
-              controller: controller.password,
-              validator: (value) => TValidator.validatePassword(value),
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.password),
-                  labelText: 'Password',
-                  hintText: 'Password',
-                  suffixIcon: Icon(Icons.visibility_off)),
-            ),
+            Obx(() => TextFormField(
+                  controller: controller.password,
+                  validator: (value) => TValidator.validatePassword(value),
+                  obscureText: controller.hidePassword.value,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.password),
+                      labelText: 'Password',
+                      hintText: 'Password',
+                      suffixIcon: IconButton(
+                          onPressed: () => controller.hidePassword.value =
+                              !controller.hidePassword.value,
+                          icon: Icon(controller.hidePassword.value
+                              ? Icons.visibility_off
+                              : Icons.visibility))),
+                )),
 
             const SizedBox(height: 16),
 
-            TextFormField(
-              controller: controller.confirmpassword,
-              validator: (value) => TValidator.validatePassword(value),
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.password),
-                  labelText: 'Confirm Password',
-                  hintText: 'Confirm Password',
-                  suffixIcon: Icon(Icons.visibility_off)),
-            ),
+            Obx(() => TextFormField(
+                  controller: controller.confirmpassword,
+                  validator: (value) => TValidator.validatePassword(value),
+                  obscureText: controller.hideConfirmPassword.value,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.password),
+                      labelText: 'Confirm Password',
+                      hintText: 'Confirm Password',
+                      suffixIcon: IconButton(
+                          onPressed: () => controller.hideConfirmPassword
+                              .value = !controller.hideConfirmPassword.value,
+                          icon: Icon(controller.hidePassword.value
+                              ? Icons.visibility_off
+                              : Icons.visibility))),
+                )),
 
             const SizedBox(height: 16),
 
@@ -70,6 +82,30 @@ class SignUpForm extends StatelessWidget {
                 child: const Text('Create Account'),
               ),
             ),
+
+            const SizedBox(height: 16),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Obx(
+                      () => Checkbox(
+                        value: controller.privacyPolicy.value,
+                        onChanged: (value) {
+                          controller.privacyPolicy.value =
+                              !controller.privacyPolicy.value;
+                        },
+                      ),
+                    )),
+                Text(
+                  'I agree to the Terms And Conditions',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+              ],
+            )
           ],
         ));
   }
