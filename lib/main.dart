@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tutorhub/bindings/general_bindings.dart';
+import 'package:tutorhub/features/authentication/screens/login/login.dart';
+import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/firebase_options.dart';
 import 'package:tutorhub/ui/screens/forget_password_page.dart';
 import 'package:tutorhub/ui/screens/password_reset_success_page.dart';
@@ -23,18 +27,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'TutorHub',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.system,
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
+        initialBinding: GeneralBindings(),
         // home: StartPage(),
         // home: SignInPage(),
         // home: SignUpPage(),
         // home: ForgetPasswordPage()
         // home: ResetPasswordPage()
         // home: ResetPasswordSuccessPage()
-        home: OTPVerificationPage());
+        // home: OTPVerificationPage(),
+        // home: LoginScreen(),
+        home: SignUpScreen());
   }
 }

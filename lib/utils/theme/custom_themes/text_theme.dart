@@ -60,7 +60,7 @@ class TTextTheme {
       color: Colors.black,
     ),
     labelSmall: const TextStyle().copyWith(
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: FontWeight.w300,
       color: Colors.black,
     ),
@@ -122,7 +122,7 @@ class TTextTheme {
       color: Colors.white,
     ),
     labelSmall: const TextStyle().copyWith(
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: FontWeight.w300,
       color: Colors.white,
     ),

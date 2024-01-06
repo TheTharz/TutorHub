@@ -90,7 +90,7 @@ class TDeviceUtils {
 
   static Future<bool> hasInternetConnection() async {
     try {
-      final result = await InternetAddress.lookup('example.com');
+      final result = await InternetAddress.lookup('www.google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         return true;
       }
@@ -114,5 +114,9 @@ class TDeviceUtils {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  static bool isDarkMode(context) {
+    return Theme.of(context).brightness == Brightness.dark;
   }
 }
