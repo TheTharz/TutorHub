@@ -17,7 +17,6 @@ class LogInForm extends StatelessWidget {
         key: controller.loginFormKey,
         child: Column(
           children: [
-
             TextFormField(
               controller: controller.email,
               validator: (value) => TValidator.validateEmail(value),
@@ -47,19 +46,16 @@ class LogInForm extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            
             // Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => controller.signUp(),
-                child: const Text('Sign In'),
+                onPressed: () => controller.logIn(),
+                child: const Text('Log In'),
               ),
             ),
 
             const SizedBox(height: 16),
-
-            
           ],
         ));
   }

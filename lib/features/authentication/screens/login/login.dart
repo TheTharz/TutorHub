@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_button/sign_button.dart';
@@ -11,7 +12,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _obscurePassword = true;
     final dark = TDeviceUtils.isDarkMode(context);
 
     return SafeArea(
@@ -101,4 +101,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
