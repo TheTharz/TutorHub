@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text('Create Account',
+                  Text('Let\'s Sign In...',
                       style: Theme.of(context).textTheme.headlineLarge),
 
                   const SizedBox(height: 16),
