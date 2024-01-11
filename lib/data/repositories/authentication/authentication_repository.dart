@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tutorhub/features/authentication/screens/login/login.dart';
+import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -10,9 +12,41 @@ class AuthenticationRepository extends GetxController {
   final _auth = FirebaseAuth.instance;
 
   //called from main.dart on app launch
+  @override
+  void onReady() {
+    //remove the native splash
+    //redirect to the appropriate screen
+    screenRedirect();
+  }
+
+  //function to determine relevent screen and redirect
+  void screenRedirect() async {
+    final user = _auth.currentUser;
+
+    if (user != null) {
+      //if the user is logged in
+    } else {
+      //local storage
+      deviceStorage.writeIfNull('IsFirstTime', false);
+
+      //check if it's the first time launching the app
+      deviceStorage.read('IsFirstTime') != true
+          ? Get.offAll(() => const LoginScreen())
+          : Get.offAll(() => const SignUpScreen());
+    }
+  }
 
   //email and password sign in
   //email authentication - sign in
+  Future<UserCredential> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {
+      throw 'Error in loginWithEmailAndPassword: $e';
+    }
+  }
 
   //email authentication - register
   Future<UserCredential> registerWithEmailAndPassword(

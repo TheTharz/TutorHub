@@ -32,13 +32,13 @@ class SignUpController extends GetxController {
       //check internet connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        // TFullScreenLoader.stopLoading();
+        TFullScreenLoader.stopLoading();
         return;
       }
 
       //form validation
       if (!signupFormKey.currentState!.validate()) {
-        // TFullScreenLoader.stopLoading();
+        TFullScreenLoader.stopLoading();
         return;
       }
 
@@ -76,11 +76,10 @@ class SignUpController extends GetxController {
       //move to verify email screen
       Get.to(() => const LoginScreen());
     } catch (e) {
+      TFullScreenLoader.stopLoading();
+
       //show an error
       TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
-    } finally {
-      //remove loader
-      TFullScreenLoader.stopLoading();
     }
   }
 }

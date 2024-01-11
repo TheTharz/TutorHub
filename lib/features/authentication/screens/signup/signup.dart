@@ -14,9 +14,6 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    bool _obscurePassword = true;
-    bool _obscureConfirmPassword = true;
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false, // Prevents overflow error
@@ -38,7 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   const SizedBox(height: 16),
 
-                  SignUpForm(),
+                  const SignUpForm(),
 
                   const SizedBox(height: 16),
 
