@@ -48,6 +48,6 @@ class MyApp extends StatelessWidget {
         // home: OTPVerificationPage(),
         // home: LoginScreen(),
         // home: SignUpScreen(),
-        home: LoginScreen());
+        home: SignUpScreen());
   }
 }
