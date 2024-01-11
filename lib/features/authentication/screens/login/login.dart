@@ -1,145 +1,99 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sign_button/sign_button.dart';
+import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
+
+import 'widgets/login_form.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool _obscurePassword = true;
     final dark = TDeviceUtils.isDarkMode(context);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false, // Prevents overflow error
-      body: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                //header
-                Text('Let\'s sign in...',
-                    style: Theme.of(context).textTheme.displayLarge),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false, // Prevents overflow error
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Text('Create Account',
+                      style: Theme.of(context).textTheme.headlineLarge),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                Text('Enter your credentials to login...',
-                    style: Theme.of(context).textTheme.bodyMedium),
+                  Text('Join Our Community With Only Few Steps...',
+                      style: Theme.of(context).textTheme.bodySmall),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                //forms
-                Form(
-                    child: Column(
-                  children: [
-                    // Email
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.email),
-                          labelText: 'Email',
-                          hintText: 'Enter your email'),
-                    ),
+                  const SizedBox(height: 16),
 
-                    const SizedBox(
-                      height: 16,
-                    ),
+                  LogInForm(),
 
-                    //password
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.lock),
-                          labelText: 'Password',
-                          hintText: 'Enter your password',
-                          suffixIcon: Icon(Icons.visibility_off)),
-                    ),
+                  const SizedBox(height: 16),
 
-                    const SizedBox(
-                      height: 8,
-                    ),
-
-                    // Remember me and forget password
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //remember me
-                        Row(
+                  // Text
+                  RichText(
+                      text: TextSpan(
+                          text: "Alread have an account? ",
+                          style: Theme.of(context).textTheme.labelSmall,
                           children: [
-                            Checkbox(value: false, onChanged: (value) {}),
-                            Text('Remember me',
-                                style: Theme.of(context).textTheme.labelSmall)
-                          ],
+                        TextSpan(
+                          text: 'Sign In',
+                          style: TextStyle(
+                            color: Colors.blue,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // TODO: Implement the Sign In logic here
+                              // Navigate to the Sign In screen
+                            },
                         ),
+                      ])),
 
-                        //forget password
-                        TextButton(
-                          onPressed: () {},
-                          child: Text('Forget password?',
+                  const SizedBox(height: 16),
+
+                  // Divider with line
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Divider(
+                            color: Colors.black54,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text("Or Continue With",
                               style: Theme.of(context).textTheme.labelSmall),
-                        )
+                        ),
+                        const Expanded(
+                          child: Divider(
+                            color: Colors.black54,
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-
-                    //sign in button
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('Sign In'),
-                      ),
-                    ),
-
-                    const SizedBox(height: 4),
-
-                    //create account button
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: const Text('Create Account'),
-                      ),
-                    )
-                  ],
-                )),
-
-                const SizedBox(height: 16),
-
-                // Divider with line
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    children: [
-                      const Expanded(
-                        child: Divider(
-                          color: Colors.black54,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("OR",
-                            style: Theme.of(context).textTheme.bodySmall),
-                      ),
-                      const Expanded(
-                        child: Divider(
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ],
                   ),
-                ),
 
-                const SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                SignInButton(
-                    buttonType: ButtonType.google,
-                    btnText: 'Sign in with Google',
-                    onPressed: () {
-                      print('click');
-                    }),
-              ],
+                  SignInButton(
+                      buttonType: ButtonType.google,
+                      btnText: 'Sign Up With Google',
+                      onPressed: () {
+                        print('click');
+                      }),
+                ],
+              ),
             ),
           ),
         ),
