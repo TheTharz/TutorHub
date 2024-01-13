@@ -50,6 +50,7 @@ flutter:
     - assets/images/star.png
     - assets/images/otpverification.png
     - assets/json/loader.json
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   fonts:
