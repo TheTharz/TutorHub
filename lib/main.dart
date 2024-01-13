@@ -32,22 +32,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        title: 'TutorHub',
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
-        theme: TAppTheme.lightTheme,
-        darkTheme: TAppTheme.darkTheme,
-        initialBinding: GeneralBindings(),
+      title: 'TutorHub',
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      theme: TAppTheme.lightTheme,
+      darkTheme: TAppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
 
-        // home: StartPage(),
-        // home: SignInPage(),
-        // home: SignUpPage(),
-        // home: ForgetPasswordPage()
-        // home: ResetPasswordPage()
-        // home: ResetPasswordSuccessPage()
-        // home: OTPVerificationPage(),
-        // home: LoginScreen(),
-        // home: SignUpScreen(),
-        home: SignUpScreen());
+      // home: StartPage(),
+      // home: SignInPage(),
+      // home: SignUpPage(),
+      // home: ForgetPasswordPage()
+      // home: ResetPasswordPage()
+      // home: ResetPasswordSuccessPage()
+      // home: OTPVerificationPage(),
+      home: LoginScreen(),
+      // home: SignUpScreen(),
+    );
   }
 }

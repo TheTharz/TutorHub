@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
+import 'package:tutorhub/features/authentication/screens/login/login.dart';
 import 'package:tutorhub/features/authentication/screens/signup/widgets/signup_form.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -52,8 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              // TODO: Implement the Sign In logic here
-                              // Navigate to the Sign In screen
+                              Get.to(() => const LoginScreen());
                             },
                         ),
                       ])),

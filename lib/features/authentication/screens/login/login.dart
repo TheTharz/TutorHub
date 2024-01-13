@@ -33,30 +33,7 @@ class LoginScreen extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
-                  const SizedBox(height: 16),
-
                   LogInForm(),
-
-                  const SizedBox(height: 16),
-
-                  // Text
-                  RichText(
-                      text: TextSpan(
-                          text: "Alread have an account? ",
-                          style: Theme.of(context).textTheme.labelSmall,
-                          children: [
-                        TextSpan(
-                          text: 'Sign In',
-                          style: TextStyle(
-                            color: Colors.blue,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              // TODO: Implement the Sign In logic here
-                              // Navigate to the Sign In screen
-                            },
-                        ),
-                      ])),
 
                   const SizedBox(height: 16),
 
@@ -88,7 +65,7 @@ class LoginScreen extends StatelessWidget {
 
                   SignInButton(
                       buttonType: ButtonType.google,
-                      btnText: 'Sign Up With Google',
+                      btnText: 'Sign In With Google',
                       onPressed: () {
                         print('click');
                       }),
