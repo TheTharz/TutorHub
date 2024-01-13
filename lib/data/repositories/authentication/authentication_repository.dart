@@ -22,17 +22,23 @@ class AuthenticationRepository extends GetxController {
   //function to determine relevent screen and redirect
   void screenRedirect() async {
     final user = _auth.currentUser;
+    final isFirstTime = deviceStorage.read('IsFirstTime') ?? true;
 
     if (user != null) {
       //if the user is logged in
+      // Get.offAll(()=>const NavigationMenu());
     } else {
       //local storage
       deviceStorage.writeIfNull('IsFirstTime', false);
 
       //check if it's the first time launching the app
-      deviceStorage.read('IsFirstTime') != true
-          ? Get.offAll(() => const LoginScreen())
-          : Get.offAll(() => const SignUpScreen());
+      if (isFirstTime) {
+        // It's the first time launching the app, redirect to SignUpScreen
+        Get.offAll(() => const SignUpScreen());
+      } else {
+        // Not the first time, redirect to LoginScreen
+        Get.offAll(() => const LoginScreen());
+      }
     }
   }
 
