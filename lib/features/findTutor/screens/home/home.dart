@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tutorhub/common/widgets/appbar/appbar.dart';
 import 'package:tutorhub/common/widgets/curved_edges/curved_edges.dart';
+import 'package:tutorhub/common/widgets/gigs/gigs_vertical.dart';
 import 'package:tutorhub/features/findTutor/screens/home/widgets/home_appbar.dart';
 import 'package:tutorhub/features/findTutor/screens/home/widgets/popular_tutor.dart';
 import 'package:tutorhub/utils/constants/colors.dart';
@@ -51,6 +52,25 @@ class HomeScreen extends StatelessWidget {
                 ))
           ],
         )),
+        // gigs
+        Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                //products
+                GigCardVerical(
+                  title: "OL Grade 11 Maths Classes",
+                  imageUrl: 'assets/images/sample.jpg',
+                  name: 'Sandun Bandara',
+                  degree: 'Bsc in Maths',
+                  experience: 8,
+                  online: true,
+                  hourlyPrice: 500.0,
+                  location: 'Online',
+                  dates: 'Flexible',
+                ),
+              ],
+            ))
       ],
     )));
   }

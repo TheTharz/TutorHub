@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sign_button/sign_button.dart';
+import 'package:tutorhub/features/authentication/controllers/login/login_controller.dart';
 import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
 
@@ -13,6 +14,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = TDeviceUtils.isDarkMode(context);
+    final controller = Get.put(LogInController());
 
     return SafeArea(
       child: Scaffold(
@@ -67,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                       buttonType: ButtonType.google,
                       btnText: 'Sign In With Google',
                       onPressed: () {
-                        print('click');
+                        controller.googleSignIn();
                       }),
                 ],
               ),

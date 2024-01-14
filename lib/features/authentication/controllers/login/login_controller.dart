@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tutorhub/features/personalization/controllers/user_controller.dart';
 
 import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../utils/helpers/loader/full_screen_loader.dart';
@@ -9,6 +10,7 @@ import '../../../../utils/helpers/network/network_manager.dart';
 
 class LogInController extends GetxController {
   static LogInController get instance => Get.find();
+  final userController = Get.put(UserController());
 
   /// variables
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
@@ -63,6 +65,40 @@ class LogInController extends GetxController {
           title: 'Congratulations!', message: 'You have sucessfully logged in');
 
       TFullScreenLoader.stopLoading();
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+
+      //show an error
+      TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
+    }
+  }
+
+  //google singin authentication
+  Future<void> googleSignIn() async {
+    try {
+      //start loading
+      TFullScreenLoader.openLoadingDialog(
+          'Logging You In ...', 'assets/json/loader.json');
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      //google authentication
+      final userCredentials =
+          await AuthenticationRepository.instance.signInWithGoogle();
+
+      //save user records
+      userController.saveUserRecord(userCredentials);
+
+      //stop the loader
+      TFullScreenLoader.stopLoading();
+
+      //redirecting the screen
+      AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
 

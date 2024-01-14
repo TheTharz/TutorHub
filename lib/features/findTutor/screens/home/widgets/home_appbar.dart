@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/notifications/notification_icon.dart';
+import '../../../../personalization/controllers/user_controller.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -10,20 +12,33 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return CustomAppBar(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      title: Row(
         children: [
-          Text("Struggling on finding tutors?",
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium!
-                  .apply(color: Colors.grey)),
-          Text("Tharindu Imalka",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .apply(color: Colors.white))
+          if (controller.user.value.picture != null)
+            CircleAvatar(
+              backgroundImage: NetworkImage(controller.user.value.picture!),
+              radius: 20,
+            ),
+          SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Welcome to learning ...",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .apply(color: Colors.grey)),
+              Obx(
+                () => Text(controller.user.value.username,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall!
+                        .apply(color: Colors.white)),
+              )
+            ],
+          ),
         ],
       ),
       actions: [

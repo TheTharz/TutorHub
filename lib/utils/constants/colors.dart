@@ -18,4 +18,6 @@ class TColors {
   static const Color success = Color(0xFF388E3C);
   static const Color warning = Color(0xFFFFA000);
   static const Color info = Color(0xFF1976D2);
+
+  static const Color darkGrey = Color(0xFF63666A);
 }
