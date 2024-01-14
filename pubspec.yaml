@@ -52,6 +52,7 @@ flutter:
     - assets/images/otpverification.png
     - assets/json/loader.json
     - assets/images/
+    - assets/on_boarding_images/
   #   - images/a_dot_ham.jpeg
 
   fonts:
