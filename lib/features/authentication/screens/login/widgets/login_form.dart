@@ -1,12 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:tutorhub/features/authentication/controllers/login/login_controller.dart';
+
 import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
-import 'package:tutorhub/navigation_menu.dart';
 
 import '../../../../../utils/validators/validation.dart';
+import '../../forget_password/forget_password_screen.dart';
 
 class LogInForm extends StatelessWidget {
   const LogInForm({
@@ -61,7 +62,15 @@ class LogInForm extends StatelessWidget {
                           controller.rememberMe.value =
                               !controller.rememberMe.value;
                         })),
-                    const Text('Remember Me')
+                    const Text('Remember Me'),
+                    const SizedBox(width: 16),
+                    GestureDetector(
+                      onTap: () => Get.to(() => ForgetPasswordScreen()),
+                      child: const Text(
+                        'Forgot Password?',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -73,8 +82,8 @@ class LogInForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                // onPressed: () => controller.logIn(),
-                onPressed: () => Get.to(() => NavigationMenu()),
+                onPressed: () => controller.logIn(),
+                // onPressed: () => Get.to(() => NavigationMenu()),
                 child: const Text('Log In'),
               ),
             ),

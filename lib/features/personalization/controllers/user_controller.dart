@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tutorhub/data/repositories/user/user_repository.dart';
 import 'package:tutorhub/features/authentication/models/user_model.dart';
 import 'package:tutorhub/utils/helpers/loader/loarder.dart';
@@ -29,15 +30,19 @@ class UserController extends GetxController {
   //save user record from any registration provider
   Future<void> saveUserRecord(UserCredential? userCredential) async {
     try {
+      //refresh user record
+      // await fetchUserRecord();
+
       if (userCredential != null) {
         final username = userCredential.user?.displayName ?? '';
 
         final user = UserModel(
-            id: userCredential.user!.uid,
-            email: userCredential.user!.email ?? '',
-            username: username,
-            picture: userCredential.user!.photoURL ?? '',
-            city: '');
+          id: userCredential.user!.uid,
+          email: userCredential.user!.email ?? '',
+          username: username,
+          picture: userCredential.user!.photoURL ?? '',
+          city: '',
+        );
         //save user data
         await userRepository.saveUserRecord(user);
       }
@@ -46,5 +51,21 @@ class UserController extends GetxController {
           title: 'Data not saved',
           message: 'Something went wrong while saving your information.');
     }
+  }
+
+  //upload profile Picture
+  uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        //upload image to firebase storage
+        final storageRef =
+            await userRepository.uploadImage('Users/Images/Profile', image);
+        //update user profile picture
+        await userRepository.updateSingleField({'picture': storageRef});
+        //refresh user record
+        await fetchUserRecord();
+      }
+    } catch (e) {}
   }
 }

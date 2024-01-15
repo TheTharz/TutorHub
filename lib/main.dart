@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tutorhub/bindings/general_bindings.dart';
 import 'package:tutorhub/data/repositories/authentication/authentication_repository.dart';
 import 'package:tutorhub/features/authentication/screens/login/login.dart';
+import 'package:tutorhub/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/firebase_options.dart';
 import 'package:tutorhub/ui/screens/forget_password_page.dart';
@@ -46,8 +47,9 @@ class MyApp extends StatelessWidget {
       // home: ResetPasswordPage()
       // home: ResetPasswordSuccessPage()
       // home: OTPVerificationPage(),
-      home: LoginScreen(),
+      // home: LoginScreen(),
       // home: SignUpScreen(),
+      home: OnBoardingScreen(),
     );
   }
 }

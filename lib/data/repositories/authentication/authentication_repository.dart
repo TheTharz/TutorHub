@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tutorhub/features/authentication/screens/login/login.dart';
+import 'package:tutorhub/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/features/findTutor/screens/home/home.dart';
 
@@ -22,6 +24,7 @@ class AuthenticationRepository extends GetxController {
   @override
   void onReady() {
     //remove the native splash
+    FlutterNativeSplash.remove();
     //redirect to the appropriate screen
     screenRedirect();
   }
@@ -29,7 +32,6 @@ class AuthenticationRepository extends GetxController {
   //function to determine relevent screen and redirect
   void screenRedirect() async {
     final user = _auth.currentUser;
-    final isFirstTime = deviceStorage.read('IsFirstTime') ?? true;
 
     if (user != null) {
       //if the user is logged in
@@ -37,16 +39,11 @@ class AuthenticationRepository extends GetxController {
       // Get.to(const HomeScreen());
     } else {
       //local storage
-      deviceStorage.writeIfNull('IsFirstTime', false);
+      deviceStorage.writeIfNull('IsFirstTime', true);
 
-      //check if it's the first time launching the app
-      if (isFirstTime) {
-        // It's the first time launching the app, redirect to SignUpScreen
-        Get.offAll(() => const SignUpScreen());
-      } else {
-        // Not the first time, redirect to LoginScreen
-        Get.offAll(() => const LoginScreen());
-      }
+      deviceStorage.read('IsFirstTime') != true
+          ? Get.offAll(() => const LoginScreen())
+          : Get.offAll(() => const OnBoardingScreen());
     }
   }
 
@@ -77,6 +74,13 @@ class AuthenticationRepository extends GetxController {
   //reauthentication - reauthentication user
 
   //email authentication - forgot password
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      throw 'Error in sendPasswordResetEmail: $e';
+    }
+  }
 
   //google authentication - google sign in
   Future<UserCredential> signInWithGoogle() async {
