@@ -22,12 +22,13 @@ class UserModel {
   //static function to create an empty user model
   static UserModel empty() {
     return UserModel(
-        id: '',
-        email: '',
-        // password: '',
-        username: '',
-        picture: '',
-        city: '');
+      id: '',
+      email: '',
+      // password: '',
+      username: '',
+      picture: '',
+      city: '',
+    );
   }
 
   //convert model to json
@@ -45,16 +46,31 @@ class UserModel {
   //factory method to create a usermodel from a firestore document snapshot
   factory UserModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
+    print('hello');
+
     if (document.data() != null) {
       final data = document.data()!;
       return UserModel(
-          id: document.id,
-          email: data['email'] ?? '',
-          username: data['username'] ?? '',
-          picture: data['picture'] ?? '',
-          city: data['city'] ?? '');
+        id: document.id,
+        email: data['email'] ?? '',
+        username: data['username'] ?? '',
+        picture: data['picture'] ?? '',
+        city: data['city'] ?? '',
+      );
     } else {
       return UserModel.empty();
     }
+  }
+
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    final data = map;
+    if (data.isEmpty) return UserModel.empty();
+    return UserModel(
+      id: map['id'] ?? '',
+      email: map['email'] ?? '',
+      username: map['username'] ?? '',
+      picture: map['picture'] ?? '',
+      city: map['city'] ?? '',
+    );
   }
 }

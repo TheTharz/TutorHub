@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tutorhub/features/findTutor/screens/add_post/add_post.dart';
 import 'package:tutorhub/features/findTutor/screens/home/home.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
 
@@ -48,7 +49,7 @@ class NavigationController extends GetxController {
   final screens = [
     const HomeScreen(),
     Container(color: Colors.blue),
-    Container(color: Colors.green),
+    const AddPostScreen(),
     Container(color: Colors.pink),
     Container(color: Colors.red),
   ];

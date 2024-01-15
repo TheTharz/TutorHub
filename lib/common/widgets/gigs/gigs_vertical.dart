@@ -10,22 +10,22 @@ class GigCardVerical extends StatelessWidget {
   const GigCardVerical(
       {super.key,
       required this.title,
-      required this.imageUrl,
-      required this.name,
-      required this.degree,
-      required this.experience,
-      required this.online,
-      required this.hourlyPrice,
-      required this.location,
-      required this.dates});
+      this.imageUrl = '',
+      this.name = '',
+      this.degree = '',
+      this.experience = 0,
+      this.preferredMethod = '',
+      this.hourlyPrice = 0,
+      this.location = '',
+      this.dates = ''});
 
   final String title;
   final String imageUrl;
   final String name;
   final String degree;
   final int experience;
-  final bool online;
-  final double hourlyPrice;
+  final String preferredMethod;
+  final int hourlyPrice;
   final String location;
   final String dates;
 
@@ -50,14 +50,15 @@ class GigCardVerical extends StatelessWidget {
               fontSize: 18, // Adjusting the font size
             ),
           ),
+          RoundedImage(
+            isNetworkImage: true,
+            imageUrl: imageUrl,
+            width: 100,
+            height: 100,
+          ),
           SizedBox(height: 8),
           Row(
             children: [
-              RoundedImage(
-                imageUrl: imageUrl,
-                width: 100,
-                height: 100,
-              ),
               SizedBox(width: 16), // Adding space between the image and text
               Column(
                 crossAxisAlignment:
@@ -79,7 +80,7 @@ class GigCardVerical extends StatelessWidget {
                 CrossAxisAlignment.start, // Align text to the left
             children: [
               experience > 0
-                  ? Text('$experience of experience')
+                  ? Text('$experience years of experience')
                   : Text('Newbie'),
               SizedBox(height: 8),
               Row(
@@ -87,7 +88,7 @@ class GigCardVerical extends StatelessWidget {
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Align text to the left
                 children: [
-                  online ? Text('Online') : Text('Physical'),
+                  Text('$preferredMethod'),
                   Text('LKR $hourlyPrice per hour'),
                 ],
               ),

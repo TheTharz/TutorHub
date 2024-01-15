@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tutorhub/data/repositories/authentication/authentication_repository.dart';
 import 'package:tutorhub/features/authentication/models/user_model.dart';
 
@@ -66,4 +70,15 @@ class UserRepository extends GetxController {
   }
 
   //upload image
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.name));
+
+      final url = await ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      throw 'Error in uploadImage: $e';
+    }
+  }
 }

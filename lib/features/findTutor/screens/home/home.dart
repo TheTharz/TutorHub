@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tutorhub/common/widgets/appbar/appbar.dart';
 import 'package:tutorhub/common/widgets/curved_edges/curved_edges.dart';
 import 'package:tutorhub/common/widgets/gigs/gigs_vertical.dart';
@@ -14,17 +15,19 @@ import '../../../../common/widgets/curved_edges/curved_edges_widget.dart';
 import '../../../../common/widgets/image_text_widgets/verticle_image_with_text.dart';
 import '../../../../common/widgets/notifications/notification_icon.dart';
 import '../../../../common/widgets/text/section_heading.dart';
+import '../../controllers/post_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final controller = Get.put(PostController());
+    return Scaffold(
         body: SingleChildScrollView(
             child: Column(
       children: [
-        PrimaryHeaderContainer(
+        const PrimaryHeaderContainer(
             child: Column(
           children: [
             //app bar
@@ -52,25 +55,46 @@ class HomeScreen extends StatelessWidget {
                 ))
           ],
         )),
+        SizedBox(height: 16),
+
         // gigs
-        Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: [
-                //products
-                GigCardVerical(
-                  title: "OL Grade 11 Maths Classes",
-                  imageUrl: 'assets/images/sample.jpg',
-                  name: 'Sandun Bandara',
-                  degree: 'Bsc in Maths',
-                  experience: 8,
-                  online: true,
-                  hourlyPrice: 500.0,
-                  location: 'Online',
-                  dates: 'Flexible',
-                ),
-              ],
-            ))
+        Obx(() {
+          if (controller.isLoading.value) {
+            return Center(
+                child: CircularProgressIndicator(
+                    color: TDeviceUtils.isDarkMode(context)
+                        ? Colors.white
+                        : Colors.black));
+          }
+          return Column(
+            children: [
+              const SectionHeading(
+                title: 'Tutor Posts',
+                showActionButton: false,
+                textColor: Colors.black,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.tutorPosts.length,
+                itemBuilder: (context, index) {
+                  final post = controller.tutorPosts[index];
+                  return GigCardVerical(
+                    title: post.title,
+                    imageUrl: post.image,
+                    name: post.owner.username,
+                    degree: post.degree,
+                    experience: post.experience,
+                    preferredMethod: post.preferredMethod,
+                    hourlyPrice: post.hourlyPrice,
+                    location: post.location,
+                    dates: post.preferredDate,
+                  );
+                },
+              ),
+            ],
+          );
+        })
       ],
     )));
   }
