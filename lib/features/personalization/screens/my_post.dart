@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tutorhub/common/widgets/gigs/my_post_gig.dart';
 import 'package:tutorhub/features/findTutor/controllers/post_controller.dart';
 
 import '../../../common/widgets/containers/primary_header_container.dart';
@@ -54,7 +55,8 @@ class MyPostScreen extends StatelessWidget {
                 itemCount: controller.myPosts.length,
                 itemBuilder: (context, index) {
                   final post = controller.myPosts[index];
-                  return GigCardVerical(
+                  return MyPostGigCardVerical(
+                    id: post.id,
                     title: post.title,
                     imageUrl: post.image,
                     name: post.owner.username,

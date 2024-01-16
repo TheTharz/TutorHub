@@ -2,10 +2,13 @@ import 'package:get/get.dart';
 import 'package:tutorhub/data/repositories/authentication/authentication_repository.dart';
 import 'package:tutorhub/data/repositories/posts/post_repository.dart';
 import 'package:tutorhub/features/findTutor/models/tutor_post_model.dart';
+import 'package:tutorhub/features/findTutor/models/user_post_model.dart';
 import 'package:tutorhub/features/personalization/controllers/user_controller.dart';
 import 'package:tutorhub/repository/models/user.dart';
 import 'package:tutorhub/utils/helpers/loader/loarder.dart';
 
+import '../../../utils/helpers/loader/full_screen_loader.dart';
+import '../../../utils/helpers/network/network_manager.dart';
 import '../../authentication/models/user_model.dart';
 
 class PostController extends GetxController {
@@ -14,8 +17,10 @@ class PostController extends GetxController {
 
   RxBool isLoading = false.obs;
   RxList<TutorPostModel> tutorPosts = <TutorPostModel>[].obs;
+  RxList<StudentPostModel> studentPosts = <StudentPostModel>[].obs;
   RxList<UserModel> tutors = <UserModel>[].obs;
   RxList<TutorPostModel> filterPosts = <TutorPostModel>[].obs;
+  // RxList<TutorPostModel> myPosts = <TutorPostModel>[].obs;
   RxString search = ''.obs;
 
   @override
@@ -36,6 +41,25 @@ class PostController extends GetxController {
 
       //assign products
       tutorPosts.assignAll(posts);
+      // filterPosts.assignAll(posts);
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Error', message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void fetchStudentPosts() async {
+    try {
+      isLoading.value = true;
+
+      //fetch products
+      final posts = await postRepository.getStudentPosts();
+
+      print('Posts: $posts');
+
+      //assign products
+      studentPosts.assignAll(posts);
       // filterPosts.assignAll(posts);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Error', message: e.toString());
@@ -76,5 +100,37 @@ class PostController extends GetxController {
         .where(
             (post) => post.owner.id == Get.put(UserController()).user.value.id)
         .toList();
+  }
+
+  //delete the post when id given
+  Future<void> deletePost(String id) async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          'Deleting Post ...', 'assets/json/loader.json');
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      //delete the post
+      await postRepository.deletePost(id);
+
+      // Fetch updated tutor posts
+      fetchTutorPosts();
+
+      //stop the loading
+      TFullScreenLoader.stopLoading();
+
+      //Show snack bar
+      TLoaders.successSnackBar(
+          title: 'Success', message: 'Post deleted successfully');
+      Get.back();
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Error', message: e.toString());
+    }
   }
 }

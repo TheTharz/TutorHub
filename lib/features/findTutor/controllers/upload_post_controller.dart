@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tutorhub/data/repositories/authentication/authentication_repository.dart';
 import 'package:tutorhub/data/repositories/posts/post_repository.dart';
+import 'package:tutorhub/features/findTutor/controllers/post_controller.dart';
+import 'package:tutorhub/features/findTutor/models/user_post_model.dart';
 import 'package:tutorhub/utils/helpers/loader/full_screen_loader.dart';
 
 import '../../../data/repositories/user/user_repository.dart';
@@ -75,6 +77,61 @@ class UploadPostController extends GetxController {
 
       //upload the post
       await postRepository.uploadPost(tutorPost);
+
+      //fetch the new posts
+      Get.find<PostController>().fetchTutorPosts();
+
+      //stop the loading
+      TFullScreenLoader.stopLoading();
+
+      //Show snack bar
+      TLoaders.successSnackBar(
+          title: 'Success', message: 'Post uploaded successfully');
+      Get.back();
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Error', message: e.toString());
+    }
+  }
+
+  Future<void> UploadUserPost() async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          'Uploading Post ...', 'assets/json/loader.json');
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      //upload image first
+      final imageLink =
+          await UserRepository.instance.uploadImage('/postimages', image.value);
+
+      //form validation
+
+      //create a new tutorpostmodel object
+      final studentPost = StudentPostModel(
+        id: '',
+        title: title.text,
+        description: description.text,
+        subject: subject.text,
+        grade: grade.text,
+        image: imageLink,
+        hourlyPrice: int.parse(hourlyPrice.text),
+        location: location.text,
+        owner: controller.user.value,
+        preferredMethod: preferredMethod.value,
+        preferredDate: preferredDate.value,
+      );
+
+      //upload the post
+      await postRepository.uploadStudentPost(studentPost);
+
+      //fetch the new posts
+      Get.find<PostController>().fetchStudentPosts();
 
       //stop the loading
       TFullScreenLoader.stopLoading();
