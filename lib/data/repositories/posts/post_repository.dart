@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:tutorhub/features/authentication/models/user_model.dart';
 
 import '../../../features/findTutor/models/tutor_post_model.dart';
 
@@ -24,6 +25,29 @@ class PostRepository extends GetxController {
       }).toList();
 
       return tutorPosts;
+    } catch (e) {
+      print('Error fetching tutor posts: $e');
+
+      throw 'Something went wrong here post repository';
+    }
+  }
+
+  //get list of tutors
+  Future<List<UserModel>> getTutors() async {
+    try {
+      final snapshot = await _db.collection("Users").limit(10).get();
+      // Print the document data
+      snapshot.docs.forEach((document) {
+        print(
+            'Document ID fetch tutor: ${document.id}, Data: ${document.data()}');
+      });
+
+      // Process the data as needed (mapping to a list of TutorPostModel, for example)
+      List<UserModel> tutors = snapshot.docs.map((document) {
+        return UserModel.fromSnapshot(document);
+      }).toList();
+
+      return tutors;
     } catch (e) {
       print('Error fetching tutor posts: $e');
 

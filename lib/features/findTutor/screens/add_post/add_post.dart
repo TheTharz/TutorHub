@@ -159,12 +159,13 @@ class AddPostScreen extends StatelessWidget {
                           width: 120.0,
                           height: 120.0,
                           fit: BoxFit.cover,
+                        )
+                      else
+                        Icon(
+                          Icons.camera_alt,
+                          size: 60.0,
+                          color: Colors.blue,
                         ),
-                      Icon(
-                        Icons.camera_alt,
-                        size: 60.0,
-                        color: Colors.blue,
-                      ),
                     ],
                   ),
                 ),

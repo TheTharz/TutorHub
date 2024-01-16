@@ -6,6 +6,7 @@ import 'package:tutorhub/data/repositories/authentication/authentication_reposit
 import 'package:tutorhub/data/repositories/posts/post_repository.dart';
 import 'package:tutorhub/utils/helpers/loader/full_screen_loader.dart';
 
+import '../../../data/repositories/user/user_repository.dart';
 import '../../../utils/helpers/loader/loarder.dart';
 import '../../../utils/helpers/network/network_manager.dart';
 import '../../personalization/controllers/user_controller.dart';
@@ -49,6 +50,10 @@ class UploadPostController extends GetxController {
         return;
       }
 
+      //upload image first
+      final imageLink =
+          await UserRepository.instance.uploadImage('/postimages', image.value);
+
       //form validation
 
       //create a new tutorpostmodel object
@@ -58,7 +63,7 @@ class UploadPostController extends GetxController {
         description: description.text,
         subject: subject.text,
         grade: grade.text,
-        image: image.value,
+        image: imageLink,
         hourlyPrice: int.parse(hourlyPrice.text),
         location: location.text,
         owner: controller.user.value,
@@ -73,6 +78,11 @@ class UploadPostController extends GetxController {
 
       //stop the loading
       TFullScreenLoader.stopLoading();
+
+      //Show snack bar
+      TLoaders.successSnackBar(
+          title: 'Success', message: 'Post uploaded successfully');
+      Get.back();
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Error', message: e.toString());

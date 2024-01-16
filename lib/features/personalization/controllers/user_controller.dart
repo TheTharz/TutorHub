@@ -59,8 +59,8 @@ class UserController extends GetxController {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image != null) {
         //upload image to firebase storage
-        final storageRef =
-            await userRepository.uploadImage('Users/Images/Profile', image);
+        final storageRef = await userRepository.uploadImage(
+            'Users/Images/Profile', image.name);
         //update user profile picture
         await userRepository.updateSingleField({'picture': storageRef});
         //refresh user record

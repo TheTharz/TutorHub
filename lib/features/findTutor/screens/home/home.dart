@@ -27,34 +27,49 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
             child: Column(
       children: [
-        const PrimaryHeaderContainer(
+        PrimaryHeaderContainer(
+            height: 400,
             child: Column(
-          children: [
-            //app bar
-            HomeAppBar(),
+              children: [
+                //app bar
+                HomeAppBar(),
 
-            SizedBox(height: 16),
+                SizedBox(height: 16),
 
-            //searchbar
-            SearchContainer(text: "Search for a tutor"),
+                //searchbar
+                SearchContainer(text: "Search for a tutor"),
 
-            SizedBox(height: 16),
+                SizedBox(height: 16),
 
-            // top teachers now
-            Padding(
-                padding: EdgeInsets.only(left: 24),
-                child: Column(
-                  children: [
-                    SectionHeading(
-                      title: 'Popular Tutors',
-                      showActionButton: false,
-                    ),
-                    SizedBox(height: 24),
-                    PopularTutors()
-                  ],
-                ))
-          ],
-        )),
+                // top teachers now
+                Padding(
+                    padding: EdgeInsets.only(left: 24),
+                    child: Column(
+                      children: [
+                        SectionHeading(
+                          title: 'Popular Tutors',
+                          showActionButton: false,
+                        ),
+                        SizedBox(height: 24),
+                        Obx(() => SizedBox(
+                              height: 150,
+                              child: ListView.builder(
+                                  itemCount: controller.tutors.length,
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    final tutor = controller.tutors[index];
+                                    print(tutor.username);
+                                    return VerticleImageText(
+                                        image: tutor.picture!,
+                                        title: tutor.username,
+                                        onTap: () {});
+                                  }),
+                            ))
+                      ],
+                    ))
+              ],
+            )),
         SizedBox(height: 16),
 
         // gigs
@@ -68,10 +83,12 @@ class HomeScreen extends StatelessWidget {
           }
           return Column(
             children: [
-              const SectionHeading(
+              SectionHeading(
                 title: 'Tutor Posts',
                 showActionButton: false,
-                textColor: Colors.black,
+                textColor: TDeviceUtils.isDarkMode(context)
+                    ? Colors.white
+                    : Colors.black,
               ),
               ListView.builder(
                 shrinkWrap: true,

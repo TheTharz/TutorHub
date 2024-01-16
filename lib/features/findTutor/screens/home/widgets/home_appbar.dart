@@ -17,9 +17,11 @@ class HomeAppBar extends StatelessWidget {
       title: Row(
         children: [
           if (controller.user.value.picture != null)
-            CircleAvatar(
-              backgroundImage: NetworkImage(controller.user.value.picture!),
-              radius: 20,
+            Obx(
+              () => CircleAvatar(
+                backgroundImage: NetworkImage(controller.user.value.picture!),
+                radius: 20,
+              ),
             ),
           SizedBox(width: 8),
           Column(
