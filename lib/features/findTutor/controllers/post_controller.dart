@@ -22,6 +22,7 @@ class PostController extends GetxController {
   RxList<TutorPostModel> filterPosts = <TutorPostModel>[].obs;
   // RxList<TutorPostModel> myPosts = <TutorPostModel>[].obs;
   RxString search = ''.obs;
+  RxBool showStudentPosts = true.obs;
 
   @override
   void onInit() {
@@ -102,6 +103,14 @@ class PostController extends GetxController {
         .toList();
   }
 
+  //posts created by the user
+  List<StudentPostModel> get myStudentPosts {
+    return studentPosts
+        .where(
+            (post) => post.owner.id == Get.put(UserController()).user.value.id)
+        .toList();
+  }
+
   //delete the post when id given
   Future<void> deletePost(String id) async {
     try {
@@ -132,5 +141,9 @@ class PostController extends GetxController {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Error', message: e.toString());
     }
+  }
+
+  void togglePosts() {
+    showStudentPosts.value = !showStudentPosts.value;
   }
 }
