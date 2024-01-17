@@ -19,6 +19,8 @@ class UserPostUploadScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Text('Post to find a tutor',
+            style: Theme.of(context).textTheme.headlineMedium),
         TextFormField(
           controller: controller.title,
           validator: (value) => TValidator.validateEmpty(value),
@@ -152,7 +154,7 @@ class UserPostUploadScreen extends StatelessWidget {
         // ... (other text fields)
         ElevatedButton(
           onPressed: controller.UploadUserPost,
-          child: Text('Upload Post'),
+          child: Text('Upload Student Post'),
         ),
 
         SizedBox(height: 8.0),

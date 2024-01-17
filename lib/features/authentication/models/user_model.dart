@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tutorhub/features/authentication/models/social_link_model.dart';
 import 'package:tutorhub/repository/models/chat.dart';
 
 class UserModel {
@@ -9,26 +10,36 @@ class UserModel {
   String? picture;
   String? city;
   List<Chat>? chats;
+  String? phoneNumber;
+  SocialLinkModel? socialLinkModel;
+  String? bio;
+  String? address;
 
-  UserModel({
-    required this.id,
-    required this.email,
-    // required this.password,
-    required this.username,
-    required this.picture,
-    required this.city,
-  });
+  UserModel(
+      {required this.id,
+      required this.email,
+      // required this.password,
+      required this.username,
+      required this.picture,
+      required this.city,
+      this.phoneNumber,
+      this.socialLinkModel,
+      this.bio,
+      this.address});
 
   //static function to create an empty user model
   static UserModel empty() {
     return UserModel(
-      id: '',
-      email: '',
-      // password: '',
-      username: '',
-      picture: '',
-      city: '',
-    );
+        id: '',
+        email: '',
+        // password: '',
+        username: '',
+        picture: '',
+        city: '',
+        phoneNumber: '',
+        socialLinkModel: SocialLinkModel.empty(),
+        bio: '',
+        address: '');
   }
 
   //convert model to json
@@ -40,6 +51,10 @@ class UserModel {
       'username': username,
       'picture': picture,
       'city': city,
+      'phoneNumber': phoneNumber,
+      'socialLinkModel': socialLinkModel?.toJson(),
+      'bio': bio,
+      'address': address,
     };
   }
 
@@ -56,6 +71,12 @@ class UserModel {
         username: data['username'] ?? '',
         picture: data['picture'] ?? '',
         city: data['city'] ?? '',
+        phoneNumber: data['phoneNumber'] ?? '',
+        bio: data['bio'] ?? '',
+        address: data['address'] ?? '',
+        socialLinkModel: SocialLinkModel.fromMap(
+          data['sociallinks'] ?? {},
+        ),
       );
     } else {
       return UserModel.empty();
@@ -71,6 +92,10 @@ class UserModel {
       username: map['username'] ?? '',
       picture: map['picture'] ?? '',
       city: map['city'] ?? '',
+      phoneNumber: map['phoneNumber'] ?? '',
+      bio: map['bio'] ?? '',
+      address: map['address'] ?? '',
+      socialLinkModel: SocialLinkModel.fromMap(map['sociallinks'] ?? {}),
     );
   }
 }

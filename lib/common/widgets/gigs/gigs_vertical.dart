@@ -5,6 +5,7 @@ import 'package:tutorhub/common/styles/shadows.dart';
 import 'package:tutorhub/common/widgets/containers/rounded_image.dart';
 import 'package:tutorhub/utils/constants/colors.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GigCardVerical extends StatelessWidget {
   const GigCardVerical(
@@ -17,7 +18,8 @@ class GigCardVerical extends StatelessWidget {
       this.preferredMethod = '',
       this.hourlyPrice = 0,
       this.location = '',
-      this.dates = ''});
+      this.dates = '',
+      this.phoneNumber = ''});
 
   final String title;
   final String imageUrl;
@@ -28,6 +30,7 @@ class GigCardVerical extends StatelessWidget {
   final int hourlyPrice;
   final String location;
   final String dates;
+  final String phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +97,36 @@ class GigCardVerical extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween, // Spacing out the elements
                 children: [
-                  Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Align text to the left
-                    children: [
-                      Text('Location - $location'),
-                      Text('Dates - $dates'),
-                    ],
-                  ),
-                  SizedBox(
-                      width: 16), // Adding space between the text and button
-                  TextButton(onPressed: () {}, child: Text('Chat Now')),
+                  if (phoneNumber
+                      .isNotEmpty) // Check if phone number is not an empty string
+                    IconButton(
+                      onPressed: () async {
+                        print('Calling now: $phoneNumber');
+                        final _call = 'tel:$phoneNumber';
+                        if (await canLaunch(_call)) {
+                          await launch(_call);
+                        }
+                      },
+                      icon: Icon(Icons.call),
+                      tooltip: 'Call Now',
+                    ),
+                  SizedBox(width: 16), // Adjust the space between buttons
+                  if (phoneNumber
+                      .isNotEmpty) // Check if phone number is not an empty string
+                    IconButton(
+                      onPressed: () async {
+                        print('Chatting with now: $phoneNumber');
+                        final _text = 'sms:$phoneNumber';
+                        if (await canLaunch(_text)) {
+                          await launch(_text);
+                        }
+                      },
+                      icon: Icon(Icons.message),
+                      tooltip: 'Chat Now',
+                    ),
                 ],
-              ),
+              )
             ],
           ),
         ],

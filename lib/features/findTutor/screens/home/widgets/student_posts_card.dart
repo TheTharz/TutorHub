@@ -29,6 +29,7 @@ class StudentPostsCard extends StatelessWidget {
           itemCount: controller.studentPosts.length,
           itemBuilder: (context, index) {
             final post = controller.studentPosts[index];
+            print('The phone number is' + post.owner.phoneNumber.toString());
             return StudentGigCardVerical(
               title: post.title,
               imageUrl: post.image,
@@ -37,6 +38,7 @@ class StudentPostsCard extends StatelessWidget {
               hourlyPrice: post.hourlyPrice,
               location: post.location,
               dates: post.preferredDate,
+              phoneNumber: post.owner.phoneNumber.toString(),
             );
           },
         ),

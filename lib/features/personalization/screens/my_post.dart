@@ -20,7 +20,7 @@ class MyPostScreen extends StatelessWidget {
         body: SingleChildScrollView(
             child: Column(
       children: [
-        PrimaryHeaderContainer(
+        const PrimaryHeaderContainer(
             height: 150,
             child: Column(
               children: [

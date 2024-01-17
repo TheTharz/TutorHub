@@ -19,6 +19,8 @@ class TutorPostAddScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Text('Post a Tutoring Service',
+            style: Theme.of(context).textTheme.headlineMedium),
         TextFormField(
           controller: controller.title,
           validator: (value) => TValidator.validateEmpty(value),

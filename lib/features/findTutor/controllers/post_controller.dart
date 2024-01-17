@@ -23,11 +23,13 @@ class PostController extends GetxController {
   // RxList<TutorPostModel> myPosts = <TutorPostModel>[].obs;
   RxString search = ''.obs;
   RxBool showStudentPosts = true.obs;
+  RxBool isStudent = false.obs;
 
   @override
   void onInit() {
     fetchTutorPosts();
     fetchTutors();
+    fetchStudentPosts();
     super.onInit();
   }
 

@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tutorhub/data/repositories/authentication/authentication_repository.dart';
 import 'package:tutorhub/data/repositories/user/user_repository.dart';
 import 'package:tutorhub/features/authentication/models/user_model.dart';
 import 'package:tutorhub/utils/helpers/loader/loarder.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
@@ -42,6 +44,7 @@ class UserController extends GetxController {
           username: username,
           picture: userCredential.user!.photoURL ?? '',
           city: '',
+          phoneNumber: '',
         );
         //save user data
         await userRepository.saveUserRecord(user);
@@ -66,6 +69,21 @@ class UserController extends GetxController {
         //refresh user record
         await fetchUserRecord();
       }
+    } catch (e) {}
+  }
+
+  Future<void> launchUrl(url) async {
+    try {
+      await launchUrl(Uri.parse(url));
+    } catch (e) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  //logout
+  Future<void> logout() async {
+    try {
+      await AuthenticationRepository.instance.logout();
     } catch (e) {}
   }
 }

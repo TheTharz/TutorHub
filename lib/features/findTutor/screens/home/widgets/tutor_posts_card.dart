@@ -39,6 +39,7 @@ class TutorPostsCard extends StatelessWidget {
               hourlyPrice: post.hourlyPrice,
               location: post.location,
               dates: post.preferredDate,
+              phoneNumber: post.owner.phoneNumber.toString(),
             );
           },
         ),
