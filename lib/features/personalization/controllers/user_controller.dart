@@ -20,6 +20,8 @@ class UserController extends GetxController {
   final userRepository = Get.put(UserRepository());
   Rx<UserModel> user = UserModel.empty().obs;
 
+  bool isSelectedImage = false;
+
   final username = TextEditingController();
   final phoneNumber = TextEditingController();
   final bio = TextEditingController();
@@ -29,10 +31,10 @@ class UserController extends GetxController {
   final facebook = TextEditingController();
   final linkedin = TextEditingController();
   final twitter = TextEditingController();
-  final picture = TextEditingController();
+  // final picture = TextEditingController();
   final email = TextEditingController();
   final id = TextEditingController();
-  final image = TextEditingController();
+  RxString image = ''.obs;
 
   @override
   void onInit() {
@@ -51,7 +53,7 @@ class UserController extends GetxController {
     facebook.text = currentUser.socialLinkModel?.facebook ?? '';
     linkedin.text = currentUser.socialLinkModel?.linkedin ?? '';
     twitter.text = currentUser.socialLinkModel?.twitter ?? '';
-    picture.text = currentUser.picture ?? '';
+    image.value = currentUser.picture ?? '';
     email.text = currentUser.email;
     id.text = currentUser.id;
   }
@@ -105,6 +107,7 @@ class UserController extends GetxController {
         await userRepository.updateSingleField({'picture': storageRef});
         //refresh user record
         await fetchUserRecord();
+        print('image uploaded');
       }
     } catch (e) {}
   }
@@ -152,7 +155,7 @@ class UserController extends GetxController {
         id: id.text.trim(),
         email: email.text.trim(),
         username: username.text.trim(),
-        picture: picture.text.trim(),
+        picture: image.value,
         city: city.text.trim(),
         phoneNumber: phoneNumber.text.trim(),
         socialLinkModel: SocialLinkModel(
@@ -177,5 +180,17 @@ class UserController extends GetxController {
       //close loading
       TFullScreenLoader.stopLoading();
     } catch (e) {}
+  }
+
+  void pickImage() async {
+    final XFile? pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      image.value = pickedImage.path;
+    }
+
+    //upload image to firebase storage
+    image.value =
+        await userRepository.uploadImage('Users/Images/Profile', image.value);
   }
 }

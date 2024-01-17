@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorhub/common/widgets/text/section_heading.dart';
@@ -25,18 +27,28 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    if (controller.user.value.picture != null)
-                      CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(controller.user.value.picture!),
-                        radius: 70,
+                    Obx(
+                      () => InkWell(
+                        onTap: controller.pickImage,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            if (controller.image.contains('http'))
+                              CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(controller.image.value),
+                                radius: 60,
+                              )
+                            else
+                              Image.file(
+                                File(controller.image.value),
+                                width: 120.0,
+                                height: 120.0,
+                                fit: BoxFit.cover,
+                              )
+                          ],
+                        ),
                       ),
-                    SizedBox(width: 8),
-                    TextButton(
-                      onPressed: () {
-                        // Implement logic to change profile picture
-                      },
-                      child: const Text('Change Profile Picture'),
                     ),
                   ],
                 ),
