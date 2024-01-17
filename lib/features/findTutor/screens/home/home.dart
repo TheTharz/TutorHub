@@ -6,6 +6,7 @@ import 'package:tutorhub/common/widgets/gigs/gigs_vertical.dart';
 import 'package:tutorhub/common/widgets/gigs/student_gig_post.dart';
 import 'package:tutorhub/features/findTutor/screens/home/widgets/home_appbar.dart';
 import 'package:tutorhub/features/findTutor/screens/home/widgets/popular_tutor.dart';
+import 'package:tutorhub/features/findTutor/screens/tutor_profile/profile.dart';
 import 'package:tutorhub/utils/constants/colors.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
 
@@ -27,37 +28,41 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(PostController());
+
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Column(
-      children: [
-        PrimaryHeaderContainer(
-            height: 400,
-            child: Column(
-              children: [
-                //app bar
-                HomeAppBar(),
+      body: RefreshIndicator(
+        onRefresh: controller.fetchAll,
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              PrimaryHeaderContainer(
+                height: 400,
+                child: Column(
+                  children: [
+                    //app bar
+                    HomeAppBar(),
 
-                SizedBox(height: 16),
+                    SizedBox(height: 16),
 
-                //searchbar
-                SearchContainer(text: "Search for a tutor"),
+                    //searchbar
+                    SearchContainer(text: "Search for a tutor"),
 
-                SizedBox(height: 16),
+                    SizedBox(height: 16),
 
-                // top teachers now
-                Padding(
-                    padding: EdgeInsets.only(left: 24),
-                    child: Column(
-                      children: [
-                        SectionHeading(
-                          title: 'Popular Tutors',
-                          showActionButton: false,
-                        ),
-                        SizedBox(height: 24),
-                        Obx(() => SizedBox(
-                              height: 150,
-                              child: ListView.builder(
+                    // top teachers now
+                    Padding(
+                      padding: EdgeInsets.only(left: 24),
+                      child: Column(
+                        children: [
+                          SectionHeading(
+                            title: 'Popular Users Of Us...',
+                            showActionButton: false,
+                          ),
+                          SizedBox(height: 24),
+                          Obx(() => SizedBox(
+                                height: 150,
+                                child: ListView.builder(
                                   itemCount: controller.tutors.length,
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true,
@@ -65,36 +70,49 @@ class HomeScreen extends StatelessWidget {
                                     final tutor = controller.tutors[index];
                                     print(tutor.username);
                                     return VerticleImageText(
-                                        image: tutor.picture!,
-                                        title: tutor.username,
-                                        onTap: () {});
-                                  }),
-                            ))
-                      ],
-                    ))
-              ],
-            )),
+                                      tutor: tutor,
+                                      image: tutor.picture!,
+                                      title: tutor.username,
+                                      onTap: () {
+                                        Get.to(
+                                            () => TutorProfile(tutor: tutor));
+                                      },
+                                    );
+                                  },
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-        SizedBox(height: 16),
+              SizedBox(height: 16),
 
-        TwoPartedButton(controller: controller),
+              TwoPartedButton(controller: controller),
 
-        // gigs
-        Obx(() {
-          if (controller.isLoading.value) {
-            return Center(
-                child: CircularProgressIndicator(
-                    color: TDeviceUtils.isDarkMode(context)
-                        ? Colors.white
-                        : Colors.black));
-          }
-          if (controller.showStudentPosts.value) {
-            return StudentPostsCard(controller: controller);
-          } else {
-            return TutorPostsCard(controller: controller);
-          }
-        }),
-      ],
-    )));
+              // gigs
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: TDeviceUtils.isDarkMode(context)
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                  );
+                }
+                if (controller.showStudentPosts.value) {
+                  return StudentPostsCard(controller: controller);
+                } else {
+                  return TutorPostsCard(controller: controller);
+                }
+              }),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

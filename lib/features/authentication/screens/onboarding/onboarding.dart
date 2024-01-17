@@ -23,16 +23,19 @@ class OnBoardingScreen extends StatelessWidget {
             children: const [
               OnBoardingPage(
                   url: 'assets/on_boarding_images/animationPageOne.json',
-                  heading: 'lorem ipsum dolor sit amet',
-                  subHeading: 'lorem ipsum dolor sit amet'),
+                  heading: 'Where Curiosity Meets Expertise',
+                  subHeading:
+                      'Foster curiosity by connecting with knowledgeable tutors who share their expertise.'),
               OnBoardingPage(
                   url: 'assets/on_boarding_images/animationPageTwo.json',
-                  heading: 'lorem ipsum dolor sit amet',
-                  subHeading: 'lorem ipsum dolor sit amet'),
+                  heading: 'Building Bridges to Brighter Futures',
+                  subHeading:
+                      'Build bridges between tutors and students, leading to brighter and more successful futures.'),
               OnBoardingPage(
                   url: 'assets/on_boarding_images/animationPageThree.json',
-                  heading: 'lorem ipsum dolor sit amet',
-                  subHeading: 'lorem ipsum dolor sit amet')
+                  heading: 'Ignite the Passion for Learning',
+                  subHeading:
+                      'Ignite a passion for learning as you connect with passionate tutors and fellow students.')
             ]),
 
         //skip button

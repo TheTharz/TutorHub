@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/authentication/models/user_model.dart';
+
 class VerticleImageText extends StatelessWidget {
   const VerticleImageText({
     super.key,
@@ -8,12 +10,14 @@ class VerticleImageText extends StatelessWidget {
     this.textColor = Colors.white,
     this.backgroundColor = Colors.white,
     this.onTap,
+    required this.tutor,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
   final void Function()? onTap;
+  final UserModel tutor;
 
   @override
   Widget build(BuildContext context) {
