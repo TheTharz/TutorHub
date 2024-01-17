@@ -75,7 +75,7 @@ class UserModel {
         bio: data['bio'] ?? '',
         address: data['address'] ?? '',
         socialLinkModel: SocialLinkModel.fromMap(
-          data['sociallinks'] ?? {},
+          data['socialLinkModel'] ?? {},
         ),
       );
     } else {

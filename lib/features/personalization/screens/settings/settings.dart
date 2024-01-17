@@ -19,7 +19,6 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
-    final user = controller.user.value;
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -36,96 +35,104 @@ class SettingsScreen extends StatelessWidget {
                               .headlineMedium!
                               .apply(color: TColors.light))),
                   const SizedBox(height: 16),
-                  ListTile(
-                    title: Text(
-                      user.username,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .apply(color: Colors.white),
+                  Obx(
+                    () => ListTile(
+                      title: Text(
+                        controller.user.value.username,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .apply(color: Colors.white),
+                      ),
+                      trailing: IconButton(
+                        onPressed: () => Get.to(() => const ProfileScreen()),
+                        icon: Icon(Icons.settings, color: Color(0xFFFFFFFF)),
+                      ),
+                      leading: controller.user.value.picture != null
+                          ? CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(controller.user.value.picture!),
+                              radius: 20,
+                            )
+                          : null,
                     ),
-                    trailing: IconButton(
-                      onPressed: () => Get.to(() => const ProfileScreen()),
-                      icon: Icon(Icons.settings, color: Color(0xFFFFFFFF)),
-                    ),
-                    leading: user.picture != null
-                        ? CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(controller.user.value.picture!),
-                            radius: 20,
-                          )
-                        : null,
                   ),
                   const SizedBox(height: 16)
                 ],
               )),
           Padding(
             padding: EdgeInsets.all(8),
-            child: Column(
-              children: [
-                SizedBox(height: 8),
-                Text(
-                  user.bio ?? 'No bio available',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                SizedBox(height: 16),
-                NameFieldProfilePage(text: 'Username', input: user.username),
-                SizedBox(height: 16),
-                NameFieldProfilePage(text: 'Email', input: user.email),
-                SizedBox(height: 16),
-                NameFieldProfilePage(text: 'City', input: user.city),
-                SizedBox(height: 16),
-                NameFieldProfilePage(
-                    text: 'Phone Number', input: user.phoneNumber),
-                SizedBox(height: 16),
-                IconFieldProfilePage(
-                  icon: Icons.facebook,
-                  input: user.socialLinkModel?.facebook,
-                ),
-                SizedBox(height: 16),
-                IconFieldProfilePage(
-                  icon: Icons.facebook,
-                  input: user.socialLinkModel?.facebook,
-                ),
-                SizedBox(height: 16),
-                IconFieldProfilePage(
-                  icon: Icons.facebook,
-                  input: user.socialLinkModel?.facebook,
-                ),
-                const Divider(),
-                Column(
-                  children: [
-                    // SettingsMenuTile(
-                    //   icon: Icons.notifications,
-                    //   title: 'Notifications',
-                    //   trailing: Switch(
-                    //     value: true,
-                    //     onChanged: (value) {},
-                    //   ),
-                    // ),
-                    SettingsMenuTile(
-                        onTap: () {},
-                        icon: Icons.privacy_tip_outlined,
-                        title: 'Privacy & Security'),
+            child: Obx(
+              () => Column(
+                children: [
+                  SizedBox(height: 8),
+                  Text(
+                    controller.user.value.bio ?? 'No bio available',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  SizedBox(height: 16),
+                  NameFieldProfilePage(
+                      text: 'Username', input: controller.user.value.username),
+                  SizedBox(height: 16),
+                  NameFieldProfilePage(
+                      text: 'Email', input: controller.user.value.email),
+                  SizedBox(height: 16),
+                  NameFieldProfilePage(
+                      text: 'City', input: controller.user.value.city),
+                  SizedBox(height: 16),
+                  NameFieldProfilePage(
+                      text: 'Phone Number',
+                      input: controller.user.value.phoneNumber),
+                  SizedBox(height: 16),
+                  IconFieldProfilePage(
+                    icon: Icons.facebook,
+                    input: controller.user.value.socialLinkModel?.facebook,
+                  ),
+                  SizedBox(height: 16),
+                  IconFieldProfilePage(
+                    icon: Icons.facebook,
+                    input: controller.user.value.socialLinkModel?.linkedin,
+                  ),
+                  SizedBox(height: 16),
+                  IconFieldProfilePage(
+                    icon: Icons.facebook,
+                    input: controller.user.value.socialLinkModel?.facebook,
+                  ),
+                  const Divider(),
+                  Column(
+                    children: [
+                      // SettingsMenuTile(
+                      //   icon: Icons.notifications,
+                      //   title: 'Notifications',
+                      //   trailing: Switch(
+                      //     value: true,
+                      //     onChanged: (value) {},
+                      //   ),
+                      // ),
+                      SettingsMenuTile(
+                          onTap: () {},
+                          icon: Icons.privacy_tip_outlined,
+                          title: 'Privacy & Security'),
 
-                    SettingsMenuTile(
-                        onTap: () {},
-                        icon: Icons.info_outline_rounded,
-                        title: 'Terms & Conditions'),
+                      SettingsMenuTile(
+                          onTap: () {},
+                          icon: Icons.info_outline_rounded,
+                          title: 'Terms & Conditions'),
 
-                    SettingsMenuTile(
-                        onTap: () {},
-                        icon: Icons.info_outline,
-                        title: 'About Tutor Hub'),
-                    SettingsMenuTile(
-                        onTap: () {
-                          controller.logout();
-                        },
-                        icon: Icons.logout,
-                        title: 'Log Out'),
-                  ],
-                )
-              ],
+                      SettingsMenuTile(
+                          onTap: () {},
+                          icon: Icons.info_outline,
+                          title: 'About Tutor Hub'),
+                      SettingsMenuTile(
+                          onTap: () {
+                            controller.logout();
+                          },
+                          icon: Icons.logout,
+                          title: 'Log Out'),
+                    ],
+                  )
+                ],
+              ),
             ),
           )
         ],

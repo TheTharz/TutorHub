@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorhub/common/widgets/text/section_heading.dart';
 import 'package:tutorhub/features/personalization/controllers/user_controller.dart';
+import 'package:tutorhub/utils/validators/validation.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key});
@@ -9,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
-    final user = controller.user.value;
+    controller.initWithCurrentUser();
 
     return Scaffold(
       appBar: AppBar(title: Text('Profile Settings')),
@@ -49,80 +50,78 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.username,
+                // initialValue: user.username,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'User Name',
                 ),
-                onChanged: (value) {
-                  // Handle changes to user name
-                },
+                controller: controller.username,
+                validator: TValidator.validateEmpty,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.phoneNumber,
+                // initialValue: user.phoneNumber,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'Phone Number',
                 ),
-                onChanged: (value) {
-                  // Handle changes to phone number
-                },
+                controller: controller.phoneNumber,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.bio,
+                // initialValue: user.bio,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'Bio',
                 ),
-                onChanged: (value) {
-                  // Handle changes to bio
-                },
+                controller: controller.bio,
+                validator: TValidator.validateEmpty,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.address,
+                // initialValue: user.address,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'Address',
                 ),
-                onChanged: (value) {
-                  // Handle changes to address
-                },
+                controller: controller.address,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.socialLinkModel?.facebook,
+                // initialValue: user.city,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.edit),
+                  labelText: 'Location',
+                ),
+                controller: controller.city,
+                validator: TValidator.validateEmpty,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                // initialValue: user.socialLinkModel?.facebook,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'Facebook',
                 ),
-                onChanged: (value) {
-                  // Handle changes to Facebook
-                },
+                controller: controller.facebook,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.socialLinkModel?.linkedin,
+                // initialValue: user.socialLinkModel?.linkedin,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'LinkedIn',
                 ),
-                onChanged: (value) {
-                  // Handle changes to LinkedIn
-                },
+                controller: controller.linkedin,
               ),
               const SizedBox(height: 16),
               TextFormField(
-                initialValue: user.socialLinkModel?.twitter,
+                // initialValue: user.socialLinkModel?.twitter,
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.edit),
                   labelText: 'Twitter',
                 ),
-                onChanged: (value) {
-                  // Handle changes to LinkedIn
-                },
+                controller: controller.twitter,
               ),
               SizedBox(height: 8.0),
               Row(
@@ -131,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         // Implement logic to submit changes
-                        // controller.updateUserProfile();
+                        controller.updateUser();
                       },
                       child: Text('Submit'),
                     ),
