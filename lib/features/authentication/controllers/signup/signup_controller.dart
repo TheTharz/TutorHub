@@ -20,7 +20,7 @@ class SignUpController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   final confirmpassword = TextEditingController();
-  GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
   //signup
   Future<void> signUp() async {

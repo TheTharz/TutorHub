@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorhub/features/findTutor/screens/add_post/add_post.dart';
 import 'package:tutorhub/features/findTutor/screens/home/home.dart';
+import 'package:tutorhub/features/findTutor/screens/search_screen/search_screen.dart';
+import 'package:tutorhub/features/personalization/screens/my_post.dart';
+import 'package:tutorhub/features/personalization/screens/profile/widgets/profile.dart';
+import 'package:tutorhub/features/personalization/screens/settings/settings.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -32,8 +36,7 @@ class NavigationMenu extends StatelessWidget {
               NavigationDestination(
                   icon: Icon(Icons.add_circle_outline), label: 'Add'),
               NavigationDestination(
-                  icon: Icon(Icons.chat_bubble_outline_outlined),
-                  label: 'Chat'),
+                  icon: Icon(Icons.post_add_outlined), label: 'My Posts'),
               NavigationDestination(
                   icon: Icon(Icons.person_outline), label: 'Profile'),
             ]),
@@ -48,9 +51,9 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    Container(color: Colors.blue),
+    const SearchScreen(),
     const AddPostScreen(),
-    Container(color: Colors.pink),
-    Container(color: Colors.red),
+    const MyPostScreen(),
+    const SettingsScreen(),
   ];
 }

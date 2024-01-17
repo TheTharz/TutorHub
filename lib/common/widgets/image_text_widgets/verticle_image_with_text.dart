@@ -25,13 +25,16 @@ class VerticleImageText extends StatelessWidget {
           children: [
             //circle icon
             Container(
-                height: 56,
-                width: 56,
-                padding: const EdgeInsets.all(8),
+                height: 80,
+                width: 80,
+                padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                     color: backgroundColor,
                     borderRadius: BorderRadius.circular(100)),
-                child: Image(image: AssetImage(image), fit: BoxFit.fill)),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(image),
+                  radius: 40,
+                )),
 
             const SizedBox(height: 8),
 
@@ -42,7 +45,7 @@ class VerticleImageText extends StatelessWidget {
                 title,
                 style: Theme.of(context)
                     .textTheme
-                    .labelMedium!
+                    .labelSmall!
                     .apply(color: textColor),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
