@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tutorhub/features/findTutor/screens/add_post/add_post.dart';
 import 'package:tutorhub/features/findTutor/screens/home/home.dart';
+import 'package:tutorhub/features/personalization/screens/settings/settings.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
 
 class NavigationMenu extends StatelessWidget {
@@ -51,6 +52,6 @@ class NavigationController extends GetxController {
     Container(color: Colors.blue),
     const AddPostScreen(),
     Container(color: Colors.pink),
-    Container(color: Colors.red),
+    const SettingsScreen()
   ];
 }

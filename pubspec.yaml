@@ -1,12 +1,12 @@
 name: tutorhub
 description: A new Flutter project.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.4 <4.0.0'
+  sdk: ">=3.1.4 <4.0.0"
 
 dependencies:
   flutter:
@@ -17,6 +17,7 @@ dependencies:
   google_fonts: ^6.1.0
   sign_button: ^2.0.6
   flutter_otp_text_field: ^1.1.0+2
+  flutter_social_button: ^1.1.4+1
 
   http: ^1.1.0
   intl: ^0.19.0
