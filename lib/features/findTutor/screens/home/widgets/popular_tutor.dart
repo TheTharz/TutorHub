@@ -22,6 +22,7 @@ class PopularTutors extends StatelessWidget {
           itemBuilder: (context, index) {
             final tutor = tutors[index];
             return VerticleImageText(
+                tutor: tutor,
                 image: 'https://picsum.photos/200/300',
                 title: tutor.username,
                 onTap: () {});

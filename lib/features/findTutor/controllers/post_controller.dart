@@ -33,6 +33,13 @@ class PostController extends GetxController {
     super.onInit();
   }
 
+  Future<void> fetchAll() async {
+    fetchTutorPosts();
+    fetchTutors();
+    fetchStudentPosts();
+    print('Fetching');
+  }
+
   void fetchTutorPosts() async {
     try {
       isLoading.value = true;

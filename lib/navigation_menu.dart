@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:tutorhub/features/findTutor/screens/add_post/add_post.dart';
 import 'package:tutorhub/features/findTutor/screens/home/home.dart';
 import 'package:tutorhub/features/findTutor/screens/search_screen/search_screen.dart';
-import 'package:tutorhub/features/personalization/screens/my_post.dart';
+import 'package:tutorhub/features/personalization/screens/my_posts/my_post.dart';
 import 'package:tutorhub/features/personalization/screens/profile/widgets/profile.dart';
 import 'package:tutorhub/features/personalization/screens/settings/settings.dart';
 import 'package:tutorhub/utils/devices/device_utility.dart';
