@@ -24,7 +24,7 @@ class LogInForm extends StatelessWidget {
           children: [
             TextFormField(
               controller: controller.email,
-              validator: (value) => TValidator.validateEmail(value),
+              validator: (value) => TValidator.validateEmail(value ?? ''),
               decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email),
                   labelText: 'Email',
@@ -35,7 +35,8 @@ class LogInForm extends StatelessWidget {
 
             Obx(() => TextFormField(
                   controller: controller.password,
-                  validator: (value) => TValidator.validatePassword(value),
+                  validator: (value) =>
+                      TValidator.validatePassword(value ?? ''),
                   obscureText: controller.hidePassword.value,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.password),
@@ -92,10 +93,10 @@ class LogInForm extends StatelessWidget {
 
             // Text
             RichText(
-                text: TextSpan(
-                    text: "Don't have an account? ",
-                    style: Theme.of(context).textTheme.labelSmall,
-                    children: [
+              text: TextSpan(
+                text: "Don't have an account? ",
+                style: Theme.of(context).textTheme.labelSmall,
+                children: [
                   TextSpan(
                     text: 'Create Account',
                     style: TextStyle(
@@ -104,10 +105,11 @@ class LogInForm extends StatelessWidget {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         Get.to(() => const SignUpScreen());
-                        // Navigate to the Sign In screen
                       },
                   ),
-                ])),
+                ],
+              ),
+            ),
           ],
         ));
   }

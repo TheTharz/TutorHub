@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tutorhub/features/personalization/controllers/user_controller.dart';
+import 'package:tutorhub/navigation_menu.dart';
 
 import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../utils/helpers/loader/full_screen_loader.dart';
@@ -23,8 +24,8 @@ class LogInController extends GetxController {
 
   @override
   void onInit() {
-    email.text = localStorage.read('REMEMBER_ME_EMAIL');
-    password.text = localStorage.read('REMEMBER_ME_PASSWORD');
+    email.text = localStorage.read('REMEMBER_ME_EMAIL') ?? '';
+    password.text = localStorage.read('REMEMBER_ME_PASSWORD') ?? '';
     super.onInit();
   }
 
@@ -54,17 +55,17 @@ class LogInController extends GetxController {
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }
 
-      final userCredential = await AuthenticationRepository.instance
+      await AuthenticationRepository.instance
           .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
-
-      //redirect
-      AuthenticationRepository.instance.screenRedirect();
 
       //show success message
       TLoaders.successSnackBar(
           title: 'Congratulations!', message: 'You have sucessfully logged in');
 
       TFullScreenLoader.stopLoading();
+
+      //redirect
+      AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       TFullScreenLoader.stopLoading();
 

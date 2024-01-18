@@ -8,6 +8,7 @@ import 'package:tutorhub/features/authentication/screens/onboarding/onboarding.d
 import 'package:tutorhub/features/authentication/screens/signup/signup.dart';
 import 'package:tutorhub/features/findTutor/screens/home/home.dart';
 
+import '../../../features/personalization/controllers/user_controller.dart';
 import '../../../navigation_menu.dart';
 
 class AuthenticationRepository extends GetxController {
@@ -32,10 +33,12 @@ class AuthenticationRepository extends GetxController {
   //function to determine relevent screen and redirect
   void screenRedirect() async {
     final user = _auth.currentUser;
+    // print(user);
 
     if (user != null) {
       //if the user is logged in
-      Get.offAll(() => const NavigationMenu());
+      UserController.instance.fetchUserRecord();
+      Get.to(() => const NavigationMenu());
       // Get.to(const HomeScreen());
     } else {
       //local storage
@@ -108,6 +111,7 @@ class AuthenticationRepository extends GetxController {
   //logout user - for any authentication
   Future<void> logout() async {
     try {
+      // UserController.instance.resetController();
       await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(const LoginScreen());
