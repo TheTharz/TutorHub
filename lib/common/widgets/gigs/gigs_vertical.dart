@@ -46,33 +46,71 @@ class GigCardVerical extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold, // Making the title bold
-              fontSize: 18, // Adjusting the font size
-            ),
-          ),
+          Center(
+              child: Text(title,
+                  style: Theme.of(context).textTheme.headlineMedium)),
+          SizedBox(height: 8),
+
+          Divider(),
+          SizedBox(height: 8),
+
           RoundedImage(
             isNetworkImage: true,
             imageUrl: imageUrl,
-            width: 100,
-            height: 100,
+            width: 300,
+            height: 200,
           ),
           SizedBox(height: 8),
           Row(
             children: [
               SizedBox(width: 16), // Adding space between the image and text
-              Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Align text to the left
+              Row(
                 children: [
-                  Text(
-                    name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // Align text to the left
+                    children: [
+                      Text(
+                        'By - $name',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      SizedBox(height: 4),
+                      Text(degree,
+                          style: Theme.of(context).textTheme.titleMedium),
+                    ],
                   ),
-                  SizedBox(height: 4),
-                  Text(degree),
+                  SizedBox(width: 80), // Adjust the space between buttonsr ow
+                  Row(
+                    children: [
+                      if (phoneNumber
+                          .isNotEmpty) // Check if phone number is not an empty string
+                        IconButton(
+                          onPressed: () async {
+                            print('Calling now: $phoneNumber');
+                            final _call = 'tel:$phoneNumber';
+                            if (await canLaunch(_call)) {
+                              await launch(_call);
+                            }
+                          },
+                          icon: Icon(Icons.call, color: Colors.green),
+                          tooltip: 'Call Now',
+                        ),
+                      SizedBox(width: 16), // Adjust the space between buttons
+                      if (phoneNumber
+                          .isNotEmpty) // Check if phone number is not an empty string
+                        IconButton(
+                          onPressed: () async {
+                            print('Chatting with now: $phoneNumber');
+                            final _text = 'sms:$phoneNumber';
+                            if (await canLaunch(_text)) {
+                              await launch(_text);
+                            }
+                          },
+                          icon: Icon(Icons.message, color: Colors.blue),
+                          tooltip: 'Chat Now',
+                        ),
+                    ],
+                  )
                 ],
               ),
             ],
@@ -83,50 +121,28 @@ class GigCardVerical extends StatelessWidget {
                 CrossAxisAlignment.start, // Align text to the left
             children: [
               experience > 0
-                  ? Text('$experience years of experience')
-                  : Text('Newbie'),
+                  ? Text('$experience years of experience',
+                      style: Theme.of(context).textTheme.titleMedium)
+                  : Text('Newbie',
+                      style: Theme.of(context).textTheme.titleMedium),
+              SizedBox(height: 8),
+              Text(
+                'Location - $location',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               SizedBox(height: 8),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Align text to the left
                 children: [
-                  Text('$preferredMethod'),
-                  Text('LKR $hourlyPrice per hour'),
+                  Text('Method - $preferredMethod',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  Text('LKR $hourlyPrice per hour',
+                      style: Theme.of(context).textTheme.titleMedium),
                 ],
               ),
               SizedBox(height: 8),
-              Row(
-                children: [
-                  if (phoneNumber
-                      .isNotEmpty) // Check if phone number is not an empty string
-                    IconButton(
-                      onPressed: () async {
-                        print('Calling now: $phoneNumber');
-                        final _call = 'tel:$phoneNumber';
-                        if (await canLaunch(_call)) {
-                          await launch(_call);
-                        }
-                      },
-                      icon: Icon(Icons.call),
-                      tooltip: 'Call Now',
-                    ),
-                  SizedBox(width: 16), // Adjust the space between buttons
-                  if (phoneNumber
-                      .isNotEmpty) // Check if phone number is not an empty string
-                    IconButton(
-                      onPressed: () async {
-                        print('Chatting with now: $phoneNumber');
-                        final _text = 'sms:$phoneNumber';
-                        if (await canLaunch(_text)) {
-                          await launch(_text);
-                        }
-                      },
-                      icon: Icon(Icons.message),
-                      tooltip: 'Chat Now',
-                    ),
-                ],
-              )
             ],
           ),
         ],

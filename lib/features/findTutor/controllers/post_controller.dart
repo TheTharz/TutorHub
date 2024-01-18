@@ -155,4 +155,36 @@ class PostController extends GetxController {
   void togglePosts() {
     showStudentPosts.value = !showStudentPosts.value;
   }
+
+  //delete the post when id given
+  Future<void> deleteStudentPost(String id) async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          'Deleting Post ...', 'assets/json/loader.json');
+
+      //check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      //delete the post
+      await postRepository.deleteStudentPost(id);
+
+      // Fetch updated tutor posts
+      fetchStudentPosts();
+
+      //stop the loading
+      TFullScreenLoader.stopLoading();
+
+      //Show snack bar
+      TLoaders.successSnackBar(
+          title: 'Success', message: 'Post deleted successfully');
+      Get.back();
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Error', message: e.toString());
+    }
+  }
 }

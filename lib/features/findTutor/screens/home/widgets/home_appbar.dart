@@ -43,12 +43,12 @@ class HomeAppBar extends StatelessWidget {
           ),
         ],
       ),
-      actions: [
-        NotificationCounterIcon(
-          onPressed: () {},
-          iconColor: Colors.white,
-        ),
-      ],
+      // actions: [
+      //   NotificationCounterIcon(
+      //     onPressed: () {},
+      //     iconColor: Colors.white,
+      //   ),
+      // ],
     );
   }
 }

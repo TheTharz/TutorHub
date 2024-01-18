@@ -61,43 +61,38 @@ class TutorProfile extends StatelessWidget {
                 ],
               )),
           Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Obx(
               () => Column(
                 children: [
                   SizedBox(height: 8),
                   Text(
-                    controller.user.value.bio ?? 'No bio available',
+                    tutor.bio ?? 'No bio available',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(height: 16),
-                  NameFieldProfilePage(
-                      text: 'Username', input: controller.user.value.username),
+                  NameFieldProfilePage(text: 'Username', input: tutor.username),
+                  SizedBox(height: 16),
+                  NameFieldProfilePage(text: 'Email', input: tutor.email),
+                  SizedBox(height: 16),
+                  NameFieldProfilePage(text: 'City', input: tutor.city),
                   SizedBox(height: 16),
                   NameFieldProfilePage(
-                      text: 'Email', input: controller.user.value.email),
-                  SizedBox(height: 16),
-                  NameFieldProfilePage(
-                      text: 'City', input: controller.user.value.city),
-                  SizedBox(height: 16),
-                  NameFieldProfilePage(
-                      text: 'Phone Number',
-                      input: controller.user.value.phoneNumber),
+                      text: 'Phone Number', input: tutor.phoneNumber),
                   SizedBox(height: 16),
                   IconFieldProfilePage(
                     icon: Icons.facebook,
-                    input: controller.user.value.socialLinkModel?.facebook,
+                    input: tutor.socialLinkModel?.facebook,
                   ),
                   SizedBox(height: 16),
                   IconFieldProfilePage(
-                    icon: Icons.facebook,
-                    input: controller.user.value.socialLinkModel?.linkedin,
+                    icon: Icons.linked_camera,
+                    input: tutor.socialLinkModel?.linkedin,
                   ),
                   SizedBox(height: 16),
                   IconFieldProfilePage(
-                    icon: Icons.facebook,
-                    input: controller.user.value.socialLinkModel?.facebook,
-                  ),
+                      icon: Icons.account_circle_outlined,
+                      input: tutor.socialLinkModel?.twitter),
                 ],
               ),
             ),

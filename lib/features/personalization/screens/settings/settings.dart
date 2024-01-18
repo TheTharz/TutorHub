@@ -61,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
                 ],
               )),
           Padding(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Obx(
               () => Column(
                 children: [
@@ -90,16 +90,17 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   IconFieldProfilePage(
-                    icon: Icons.facebook,
+                    icon: Icons.camera_alt,
                     input: controller.user.value.socialLinkModel?.linkedin,
                   ),
                   SizedBox(height: 16),
                   IconFieldProfilePage(
-                    icon: Icons.facebook,
+                    icon: Icons.linked_camera,
                     input: controller.user.value.socialLinkModel?.facebook,
                   ),
                   const Divider(),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       // SettingsMenuTile(
                       //   icon: Icons.notifications,
@@ -116,12 +117,12 @@ class SettingsScreen extends StatelessWidget {
 
                       SettingsMenuTile(
                           onTap: () {},
-                          icon: Icons.info_outline_rounded,
+                          icon: Icons.info_outline,
                           title: 'Terms & Conditions'),
 
                       SettingsMenuTile(
                           onTap: () {},
-                          icon: Icons.info_outline,
+                          icon: Icons.data_exploration_sharp,
                           title: 'About Tutor Hub'),
                       SettingsMenuTile(
                           onTap: () {

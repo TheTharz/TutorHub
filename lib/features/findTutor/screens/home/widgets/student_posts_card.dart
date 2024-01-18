@@ -17,12 +17,6 @@ class StudentPostsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionHeading(
-          title: 'Student Posts',
-          showActionButton: false,
-          textColor:
-              TDeviceUtils.isDarkMode(context) ? Colors.white : Colors.black,
-        ),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -30,15 +24,21 @@ class StudentPostsCard extends StatelessWidget {
           itemBuilder: (context, index) {
             final post = controller.studentPosts[index];
             print('The phone number is' + post.owner.phoneNumber.toString());
-            return StudentGigCardVerical(
-              title: post.title,
-              imageUrl: post.image,
-              name: post.owner.username,
-              preferredMethod: post.preferredMethod,
-              hourlyPrice: post.hourlyPrice,
-              location: post.location,
-              dates: post.preferredDate,
-              phoneNumber: post.owner.phoneNumber.toString(),
+            return Column(
+              children: [
+                const SizedBox(height: 20),
+                StudentGigCardVerical(
+                  title: post.title,
+                  imageUrl: post.image,
+                  name: post.owner.username,
+                  preferredMethod: post.preferredMethod,
+                  hourlyPrice: post.hourlyPrice,
+                  location: post.location,
+                  dates: post.preferredDate,
+                  phoneNumber: post.owner.phoneNumber.toString(),
+                  subject: post.subject,
+                ),
+              ],
             );
           },
         ),

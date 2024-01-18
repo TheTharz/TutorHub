@@ -16,7 +16,7 @@ class IconFieldProfilePage extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 16, // Adjust the size as needed
+          size: 40, // Adjust the size as needed
           color: Theme.of(context).textTheme.bodyMedium!.color,
         ),
         SizedBox(width: 8), // Add some space between icon and text

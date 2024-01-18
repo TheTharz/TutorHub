@@ -17,7 +17,10 @@ class NameFieldProfilePage extends StatelessWidget {
         Expanded(
             flex: 1,
             child: Text(text,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .apply(fontWeightDelta: 2),
                 overflow: TextOverflow.ellipsis)),
         Expanded(
             child: Text(input!,
