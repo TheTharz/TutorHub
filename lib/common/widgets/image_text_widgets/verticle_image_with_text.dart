@@ -54,7 +54,9 @@ class VerticleImageText extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-            )
+            ),
+
+            const SizedBox(width: 8),
           ],
         ),
       ),

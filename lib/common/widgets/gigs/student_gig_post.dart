@@ -18,6 +18,7 @@ class StudentGigCardVerical extends StatelessWidget {
     this.location = '',
     this.dates = '',
     this.phoneNumber = '',
+    required this.subject,
   });
 
   final String title;
@@ -29,6 +30,7 @@ class StudentGigCardVerical extends StatelessWidget {
   final String location;
   final String dates;
   final String phoneNumber;
+  final String subject;
 
   final String _url = 'http://via.placeholder.com/350x150';
 
@@ -46,18 +48,20 @@ class StudentGigCardVerical extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold, // Making the title bold
-              fontSize: 18, // Adjusting the font size
+          Center(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headlineMedium,
+              textAlign: TextAlign.center,
             ),
           ),
+          Divider(),
+          const SizedBox(height: 8),
           RoundedImage(
             isNetworkImage: true,
             imageUrl: imageUrl,
-            width: 100,
-            height: 100,
+            width: 300,
+            height: 200,
           ),
 
           SizedBox(height: 16), // Adding space between the sections
@@ -70,8 +74,14 @@ class StudentGigCardVerical extends StatelessWidget {
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Align text to the left
                 children: [
-                  Text('$preferredMethod'),
-                  Text('LKR $hourlyPrice per hour'),
+                  Text(
+                    subject,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  Text(
+                    'LKR $hourlyPrice per hour',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ],
               ),
               SizedBox(height: 8),
@@ -83,8 +93,18 @@ class StudentGigCardVerical extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Align text to the left
                     children: [
-                      Text('Location - $location'),
-                      Text('Dates - $dates'),
+                      Text(
+                        'Method - $preferredMethod',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        'Location - $location',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        'Dates - $dates',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                     ],
                   ),
                   Row(
@@ -99,7 +119,7 @@ class StudentGigCardVerical extends StatelessWidget {
                               await launch(_call);
                             }
                           },
-                          icon: Icon(Icons.call),
+                          icon: Icon(Icons.call, color: Colors.green),
                           tooltip: 'Call Now',
                         ),
                       SizedBox(width: 16), // Adjust the space between buttons
@@ -113,7 +133,10 @@ class StudentGigCardVerical extends StatelessWidget {
                               await launch(_text);
                             }
                           },
-                          icon: Icon(Icons.message),
+                          icon: Icon(
+                            Icons.message,
+                            color: Colors.blue,
+                          ),
                           tooltip: 'Chat Now',
                         ),
                     ],

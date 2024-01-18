@@ -135,4 +135,15 @@ class PostRepository extends GetxController {
       throw 'Something went wrong here post repository';
     }
   }
+
+  Future<void> deleteStudentPost(String id) async {
+    try {
+      await _db.collection("StudentPosts").doc(id).delete();
+      // await getTutorPosts();
+    } catch (e) {
+      print('Error deleting post: $e');
+
+      throw 'Something went wrong here post repository';
+    }
+  }
 }

@@ -48,18 +48,19 @@ class MyPostGigCardVerical extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold, // Making the title bold
-              fontSize: 18, // Adjusting the font size
+          Center(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
+          Divider(),
+          const SizedBox(height: 8),
           RoundedImage(
             isNetworkImage: true,
             imageUrl: imageUrl,
-            width: 100,
-            height: 100,
+            width: 300,
+            height: 200,
           ),
           SizedBox(height: 8),
           Row(
@@ -70,11 +71,11 @@ class MyPostGigCardVerical extends StatelessWidget {
                     CrossAxisAlignment.start, // Align text to the left
                 children: [
                   Text(
-                    name,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    'By -$name',
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(height: 4),
-                  Text(degree),
+                  Text(degree, style: Theme.of(context).textTheme.titleMedium),
                 ],
               ),
             ],
@@ -85,16 +86,20 @@ class MyPostGigCardVerical extends StatelessWidget {
                 CrossAxisAlignment.start, // Align text to the left
             children: [
               experience > 0
-                  ? Text('$experience years of experience')
-                  : Text('Newbie'),
+                  ? Text('$experience years of experience',
+                      style: Theme.of(context).textTheme.titleMedium)
+                  : Text('Newbie',
+                      style: Theme.of(context).textTheme.titleMedium),
               SizedBox(height: 8),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Align text to the left
                 children: [
-                  Text('$preferredMethod'),
-                  Text('LKR $hourlyPrice per hour'),
+                  Text('$preferredMethod',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  Text('LKR $hourlyPrice per hour',
+                      style: Theme.of(context).textTheme.titleMedium),
                 ],
               ),
               SizedBox(height: 8),
@@ -106,17 +111,36 @@ class MyPostGigCardVerical extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Align text to the left
                     children: [
-                      Text('Location - $location'),
-                      Text('Dates - $dates'),
+                      Text('Location - $location',
+                          style: Theme.of(context).textTheme.titleMedium),
+                      Text('Dates - $dates',
+                          style: Theme.of(context).textTheme.titleMedium),
                     ],
                   ),
                   SizedBox(
                       width: 16), // Adding space between the text and button
                   TextButton(
-                      onPressed: () {
-                        controller.deletePost(id);
-                      },
-                      child: Text('Delete Post')),
+                    onPressed: () {
+                      controller.deleteStudentPost(id);
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.white, // Text color
+                      backgroundColor: Colors.red, // Background color
+                      padding: EdgeInsets.all(
+                          12), // Padding around the button content
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(8), // Button border radius
+                      ),
+                    ),
+                    child: Text(
+                      'Delete Post',
+                      style: TextStyle(
+                        fontSize: 16, // Text font size
+                        fontWeight: FontWeight.bold, // Text font weight
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],

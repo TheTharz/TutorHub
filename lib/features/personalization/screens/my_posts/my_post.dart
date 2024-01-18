@@ -44,58 +44,62 @@ class MyPostScreen extends StatelessWidget {
                   ),
                 );
               }
-              return Column(
-                children: [
-                  SectionHeading(
-                    title: controller.showStudentPosts.value
-                        ? 'Your Posts As A Student'
-                        : 'Your Posts As A Tutor',
-                    showActionButton: false,
-                    textColor: TDeviceUtils.isDarkMode(context)
-                        ? Colors.white
-                        : Colors.black,
-                  ),
-                  if (controller.showStudentPosts.value)
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.myStudentPosts.length,
-                      itemBuilder: (context, index) {
-                        final post = controller.myStudentPosts[index];
-                        return MyStudentPost(
-                          id: post.id,
-                          title: post.title,
-                          imageUrl: post.image,
-                          name: post.owner.username,
-                          preferredMethod: post.preferredMethod,
-                          hourlyPrice: post.hourlyPrice,
-                          location: post.location,
-                          dates: post.preferredDate,
-                        );
-                      },
-                    )
-                  else
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.myPosts.length,
-                      itemBuilder: (context, index) {
-                        final post = controller.myPosts[index];
-                        return MyPostGigCardVerical(
-                          id: post.id,
-                          title: post.title,
-                          imageUrl: post.image,
-                          name: post.owner.username,
-                          degree: post.degree,
-                          experience: post.experience,
-                          preferredMethod: post.preferredMethod,
-                          hourlyPrice: post.hourlyPrice,
-                          location: post.location,
-                          dates: post.preferredDate,
-                        );
-                      },
-                    ),
-                ],
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    if (controller.showStudentPosts.value)
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.myStudentPosts.length,
+                        itemBuilder: (context, index) {
+                          final post = controller.myStudentPosts[index];
+                          return Column(
+                            children: [
+                              MyStudentPost(
+                                id: post.id,
+                                title: post.title,
+                                imageUrl: post.image,
+                                name: post.owner.username,
+                                preferredMethod: post.preferredMethod,
+                                hourlyPrice: post.hourlyPrice,
+                                location: post.location,
+                                dates: post.preferredDate,
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                          );
+                        },
+                      )
+                    else
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.myPosts.length,
+                        itemBuilder: (context, index) {
+                          final post = controller.myPosts[index];
+                          return Column(
+                            children: [
+                              MyPostGigCardVerical(
+                                id: post.id,
+                                title: post.title,
+                                imageUrl: post.image,
+                                name: post.owner.username,
+                                degree: post.degree,
+                                experience: post.experience,
+                                preferredMethod: post.preferredMethod,
+                                hourlyPrice: post.hourlyPrice,
+                                location: post.location,
+                                dates: post.preferredDate,
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                          );
+                        },
+                      ),
+                  ],
+                ),
               );
             }),
           ],

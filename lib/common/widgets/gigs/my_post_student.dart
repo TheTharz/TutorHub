@@ -44,20 +44,22 @@ class MyStudentPost extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold, // Making the title bold
-              fontSize: 18, // Adjusting the font size
+          Center(
+            child: Text(
+              title,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
+          Divider(),
+          SizedBox(height: 8),
+
           RoundedImage(
             isNetworkImage: true,
             imageUrl: imageUrl,
-            width: 100,
-            height: 100,
+            width: 300,
+            height: 200,
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 16),
           // Adding space between the sections
           Column(
             crossAxisAlignment:
@@ -68,11 +70,13 @@ class MyStudentPost extends StatelessWidget {
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Align text to the left
                 children: [
-                  Text('$preferredMethod'),
-                  Text('LKR $hourlyPrice per hour'),
+                  Text('LKR $hourlyPrice per hour',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  Text('Location - $location',
+                      style: Theme.of(context).textTheme.titleMedium),
                 ],
               ),
-              SizedBox(height: 8),
+              SizedBox(height: 16),
               Row(
                 mainAxisAlignment:
                     MainAxisAlignment.spaceBetween, // Spacing out the elements
@@ -81,17 +85,36 @@ class MyStudentPost extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Align text to the left
                     children: [
-                      Text('Location - $location'),
-                      Text('Dates - $dates'),
+                      Text('Method - $preferredMethod',
+                          style: Theme.of(context).textTheme.titleMedium),
+                      Text('Dates - $dates',
+                          style: Theme.of(context).textTheme.titleMedium),
                     ],
                   ),
                   SizedBox(
                       width: 16), // Adding space between the text and button
                   TextButton(
-                      onPressed: () {
-                        controller.deletePost(id);
-                      },
-                      child: Text('Delete Post')),
+                    onPressed: () {
+                      controller.deleteStudentPost(id);
+                    },
+                    style: TextButton.styleFrom(
+                      primary: Colors.white, // Text color
+                      backgroundColor: Colors.red, // Background color
+                      padding: EdgeInsets.all(
+                          12), // Padding around the button content
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(8), // Button border radius
+                      ),
+                    ),
+                    child: Text(
+                      'Delete Post',
+                      style: TextStyle(
+                        fontSize: 16, // Text font size
+                        fontWeight: FontWeight.bold, // Text font weight
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],

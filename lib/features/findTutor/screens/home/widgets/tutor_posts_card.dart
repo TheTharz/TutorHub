@@ -17,29 +17,28 @@ class TutorPostsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionHeading(
-          title: 'Tutor Posts',
-          showActionButton: false,
-          textColor:
-              TDeviceUtils.isDarkMode(context) ? Colors.white : Colors.black,
-        ),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: controller.tutorPosts.length,
           itemBuilder: (context, index) {
             final post = controller.tutorPosts[index];
-            return GigCardVerical(
-              title: post.title,
-              imageUrl: post.image,
-              name: post.owner.username,
-              degree: post.degree,
-              experience: post.experience,
-              preferredMethod: post.preferredMethod,
-              hourlyPrice: post.hourlyPrice,
-              location: post.location,
-              dates: post.preferredDate,
-              phoneNumber: post.owner.phoneNumber.toString(),
+            return Column(
+              children: [
+                GigCardVerical(
+                  title: post.title,
+                  imageUrl: post.image,
+                  name: post.owner.username,
+                  degree: post.degree,
+                  experience: post.experience,
+                  preferredMethod: post.preferredMethod,
+                  hourlyPrice: post.hourlyPrice,
+                  location: post.location,
+                  dates: post.preferredDate,
+                  phoneNumber: post.owner.phoneNumber.toString(),
+                ),
+                const SizedBox(height: 16),
+              ],
             );
           },
         ),
